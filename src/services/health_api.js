@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const API_BASE_URL = 'https://health.shrp.dev';
 const PEOPLE_STORAGE_KEY = 'peopleData';
+const PHYSICAL_ACTIVITIES_STORAGE_KEY = 'physicalActivitiesData'
 const CACHE_DURATION = 1000 * 60 * 60;
 
 const apiService = axios.create({
@@ -35,6 +36,16 @@ async function fetchDataWithCache(uri, storageKey, cacheDuration) {
 
 export const getPeople = async () => {
   return await fetchDataWithCache("/items/people", PEOPLE_STORAGE_KEY, CACHE_DURATION)
+    .then(data => {
+      return data.data;
+    })
+    .catch(error => {
+      console.error('Failed to fetch data:', error);
+    });
+}
+
+export const getPhysicalActivities = async () => {
+  return await fetchDataWithCache("/items/physicalActivities", PHYSICAL_ACTIVITIES_STORAGE_KEY, CACHE_DURATION)
     .then(data => {
       return data.data;
     })
