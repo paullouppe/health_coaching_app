@@ -1,3 +1,3 @@
 # health_coaching_app
-## Louppe Paul / Risse Chloé / Rodriguez Noham / Martin Noëllie
+## Louppe Paul / Risse Chloé / Rodrigues Noham / Martin Noëllie
 A project for the "CM EC1 Technologies informatiques innovantes"
