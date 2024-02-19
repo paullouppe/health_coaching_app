@@ -65,7 +65,9 @@ export const getPeopleById = async (id) => {
 
   try {
     const response = await apiService.get(`/items/people/${id}`);
-    return response.data;
+    console.log("Data from distant");
+    console.log(response.data.data);
+    return response.data.data;
   } catch (error) {
     console.error('Failed to fetch data:', error);
     throw error; 
