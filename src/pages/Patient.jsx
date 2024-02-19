@@ -14,7 +14,7 @@ function Patient() {
     useEffect(() => {
         getPeopleById(patientId)
             .then((data) => {
-                setPatient(data.data.data);
+                setPatient(data);
                 setIsLoading(false)
             })
             .catch((err) => {
@@ -32,7 +32,7 @@ function Patient() {
     }
 
     return (
-        <div>
+        <div className="text-center">
             <div>
                 <span className="uppercase">{patient.lastname}</span> {patient.firstname}
             </div>

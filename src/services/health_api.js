@@ -46,8 +46,31 @@ export const getPeople = async () => {
 }
 
 export const getPeopleById = async (id) => {
-    return await apiService.get(`/items/people/${id}`);
-}
+  const cachedData = localStorage.getItem(PEOPLE_STORAGE_KEY);
+  if (cachedData) {
+    const { expiry, data } = JSON.parse(cachedData);
+
+    if (expiry > Date.now()) {
+      console.log("Data from cache");
+      let person = null;
+      data.data.data.forEach(p => {
+        if(p.id === id)
+          person = p;
+      });
+      if (person) {
+        return person;
+      }
+    }
+  }
+
+  try {
+    const response = await apiService.get(`/items/people/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Failed to fetch data:', error);
+    throw error; 
+  }
+};
 
 export const getPhysicalActivities = async () => {
   return await fetchDataWithCache("/items/physicalActivities", PHYSICAL_ACTIVITIES_STORAGE_KEY, CACHE_DURATION)
