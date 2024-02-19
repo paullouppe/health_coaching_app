@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { getPeopleById } from '@/services/health_api';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import Errors from './functional_pages/Errors'
 
 function Patient() {
     let { patientId } = useParams();
@@ -24,7 +25,7 @@ function Patient() {
     }, []);
 
     if (hasErrors) {
-        return (<div>Errors</div>)
+        return (<Errors/>);
     }
 
     if (isLoading) {
@@ -40,9 +41,9 @@ function Patient() {
             <div>taille : {patient.height}</div>
             <div>poids : {patient.weightStart}</div>
             <div>objectif : {patient.weightGoal}</div>
-            <Button>
-                <Link to={"/"}>Retour</Link>
-            </Button>
+            <Link to={"/"}>
+                <Button>Retour</Button>
+            </Link>
         </div>
     )
 }
