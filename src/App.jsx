@@ -1,14 +1,22 @@
-import { useState } from 'react'
-import './App.css'
-import { Button } from './components/ui/button'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from 'react-router-dom';
+
+import Home from './pages/Home';
+import Patient from './pages/Patient';
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <Button>Test the button</Button>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="patient/:patientId" element={<Patient />} />
+      </Routes>
+    </Router>
   )
 }
 
