@@ -9,6 +9,7 @@ import {
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 
 
 function Home() {
@@ -45,11 +46,17 @@ function Home() {
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
                     {patients.map((p,index) => (
                         <div key={index}>
-                            <Card className="w-auto h-20 grid grid-cols-2 flex justifiy-evenly pt-5">
-                                <img className="ml-4 w-10 h-10" src ="src/assets/react.svg"></img>
-                                <Link className="pt-1.5 pl-3" to={"/patient/"+p.id}><span className="uppercase">{p.lastname}</span> {p.firstname}</Link>
+                        <Link to={"/patient/"+p.id}>
+                            <Card className="flex items-center transition-transform active:scale-95">
+                                <img className="ml-4 w-10 h-10" src={p.icon}></img>
+                                <CardHeader>
+                                  <CardTitle><span className="uppercase">{p.lastname}</span> {p.firstname}</CardTitle>
+                                  <CardDescription>
+                                    <Badge className="capitalize text-neutral-500	" variant="secondary">{p.activityProfile}</Badge>
+                                  </CardDescription>
+                                </CardHeader>
                             </Card>
-                            
+                          </Link>
                         </div>
                     ))}
                 </div>

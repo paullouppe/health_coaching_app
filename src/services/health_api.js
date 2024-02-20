@@ -32,13 +32,14 @@ async function fetchDataWithCache(uri, storageKey, cacheDuration) {
   );
 
   console.log("Data from distant");
+  if (storageKey === PEOPLE_STORAGE_KEY)
+    feedDataWithIcons(data);
   return data;
 }
 
 export const getPeople = async () => {
   return await fetchDataWithCache("/items/people", PEOPLE_STORAGE_KEY, CACHE_DURATION)
     .then(data => {
-      feedDataWithIcons(data);
       return data.data;
     })
     .catch(error => {
@@ -100,9 +101,9 @@ function feedDataWithIcons(data_tofill){
   let img_path = "src/assets/";
   data_tofill.data.data.forEach((p, i) => {
     if(p.sex === 1)
-      p.icon = `${img_path}man_${Math.floor(Math.random() * 6)}.png`;
+      p.icon = `${img_path}man_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`;
     else
-      p.icon = `${img_path}woman_${Math.floor(Math.random() * 6)}.png`;
+      p.icon = `${img_path}woman_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`;
   });
 
   //feeding cache
