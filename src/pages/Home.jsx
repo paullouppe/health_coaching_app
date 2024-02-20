@@ -75,23 +75,31 @@ function Home() {
                         <img src="src/assets/search_logo.png"></img>
                     </Button>
                 </div>
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                    {displayPatients.map((p, index) => (
-                        <div key={index}>
-                            <Link to={"/patient/" + p.id}>
-                                <Card className="flex items-center transition-transform active:scale-95">
-                                    <img className="ml-4 w-10 h-10" src={p.icon}></img>
-                                    <CardHeader>
-                                        <CardTitle><span className="uppercase">{p.lastname}</span> {p.firstname}</CardTitle>
-                                        <CardDescription>
-                                            <Badge className="capitalize text-neutral-500	" variant="secondary">{p.activityProfile}</Badge>
-                                        </CardDescription>
-                                    </CardHeader>
-                                </Card>
-                            </Link>
-                        </div>
-                    ))}
+
+                {displayPatients.length === 0 ? (
+                <div className="text-center py-5">
+                    <p>No results found.</p>
                 </div>
+            ) : (
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                  {displayPatients.map((p, index) => (
+                      <div key={index}>
+                          <Link to={"/patient/" + p.id}>
+                              <Card className="flex items-center transition-transform active:scale-95">
+                                  <img className="ml-4 w-10 h-10" src={p.icon}></img>
+                                  <CardHeader>
+                                      <CardTitle><span className="uppercase">{p.lastname}</span> {p.firstname}</CardTitle>
+                                      <CardDescription>
+                                          <Badge className="capitalize text-neutral-500	" variant="secondary">{p.activityProfile}</Badge>
+                                      </CardDescription>
+                                  </CardHeader>
+                              </Card>
+                          </Link>
+                      </div>
+                  ))}
+              </div>
+            )}
+
             </div>
         </>
     )
