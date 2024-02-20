@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react"
 import { getPeople } from "../services/health_api"
 import { Link } from 'react-router-dom';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+  } from "@/components/ui/card"
+
 
 function Home() {
 
@@ -33,10 +42,14 @@ function Home() {
         <>
             <div className="container mx-auto px-4">
                 <h1 className="text-center text-4xl mt-6 mb-4">Health App</h1>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
                     {patients.map((p,index) => (
                         <div key={index}>
-                            <Link to={"/patient/"+p.id}><span className="uppercase">{p.lastname}</span> {p.firstname}</Link>
+                            <Card className="w-auto h-20 grid grid-cols-2 flex justifiy-evenly pt-5">
+                                <img className="ml-4 w-10 h-10" src ="src/assets/react.svg"></img>
+                                <Link className="pt-1.5 pl-3" to={"/patient/"+p.id}><span className="uppercase">{p.lastname}</span> {p.firstname}</Link>
+                            </Card>
+                            
                         </div>
                     ))}
                 </div>
