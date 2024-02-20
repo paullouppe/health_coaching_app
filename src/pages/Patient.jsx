@@ -37,10 +37,10 @@ function Patient() {
             <div>
                 <span className="uppercase">{patient.lastname}</span> {patient.firstname}
             </div>
-            <div>sexe : {(patient.sex === 1) ? "Homme" : "Femme"}</div>
-            <div>taille : {patient.height}</div>
-            <div>poids : {patient.weightStart}</div>
-            <div>objectif : {patient.weightGoal}</div>
+            <div>Sex : {(patient.sex === 1) ? "Man" : "Woman"}</div>
+            <div>Height : {patient.height}</div>
+            <div>Weight : {patient.weightStart}</div>
+            <div>Weight Goal : {patient.weightGoal}</div>
             <Link to={"/"}>
                 <Button>Retour</Button>
             </Link>
