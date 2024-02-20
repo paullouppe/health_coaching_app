@@ -48,7 +48,7 @@ function Home() {
                     {patients.map((p,index) => (
                         <div key={index}>
                         <Link to={"/patient/"+p.id}>
-                            <Card className="flex items-center transition-transform active:scale-95">
+                            <Card className="flex items-center transition-transform hover:scale-105 active:scale-95">
                                 <img className="ml-4 w-10 h-10" src={p.icon}></img>
                                 <CardHeader>
                                   <CardTitle><span className="uppercase">{p.lastname}</span> {p.firstname}</CardTitle>
