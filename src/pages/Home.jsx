@@ -23,8 +23,15 @@ function Home() {
     useEffect(() => {
         getPeople()
             .then((data) => {
-                setAllPatients(data.data);
-                setDisplayPatients(data.data); // Initially, display all patients
+                const sortedPatients = data.data.sort((a, b) => {
+                  const lastNameComparison = a.lastname.localeCompare(b.lastname);
+                  if (lastNameComparison !== 0) {
+                      return lastNameComparison;
+                  }
+                  return a.firstname.localeCompare(b.firstname);
+                });
+                setAllPatients(sortedPatients);
+                setDisplayPatients(sortedPatients);
                 setIsLoading(false);
             })
             .catch((err) => {
