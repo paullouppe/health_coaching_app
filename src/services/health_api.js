@@ -32,6 +32,8 @@ async function fetchDataWithCache(uri, storageKey, cacheDuration) {
   );
 
   console.log("Data from distant");
+  if (storageKey === PEOPLE_STORAGE_KEY)
+    feedDataWithIcons(data);
   return data;
 }
 
@@ -70,7 +72,7 @@ export const getPeopleById = async (id) => {
     return response.data.data;
   } catch (error) {
     console.error('Failed to fetch data:', error);
-    throw error; 
+    throw error;
   }
 };
 
@@ -92,4 +94,30 @@ export const getPhysiologicalData = async () => {
     .catch(error => {
       console.error('Failed to fetch data:', error);
     });
+}
+
+function feedDataWithIcons(data_tofill){
+  //filling img
+  let img_path = "src/assets/";
+  data_tofill.data.data.forEach((p, i) => {
+    if(p.sex === 1)
+      p.icon = `${img_path}man_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`;
+    else
+      p.icon = `${img_path}woman_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`;
+  });
+
+  //feeding cache
+  const cachedData = localStorage.getItem(PEOPLE_STORAGE_KEY);
+  if (cachedData) {
+    const { expiry, data } = JSON.parse(cachedData);
+    localStorage.setItem(
+      PEOPLE_STORAGE_KEY,
+      JSON.stringify({
+        expiry,
+        data: data_tofill,
+      })
+    );
+  }
+
+  console.log(data_tofill);
 }
