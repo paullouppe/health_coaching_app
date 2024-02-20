@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import { getPeople } from "../services/health_api"
+import { useEffect, useState } from "react";
+import { getPeople } from "../services/health_api";
 import { Link } from 'react-router-dom';
 import {
     Card,
@@ -22,17 +22,25 @@ import {
 } from "@/components/ui/sheet"
 
 function Home() {
-
-    const [patients, setPatients] = useState([]);
+    const [allPatients, setAllPatients] = useState([]); // New state to keep the original list of patients
+    const [displayPatients, setDisplayPatients] = useState([]); // This state will be used to display patients
+    const [searchInput, setSearchInput] = useState("");
     const [hasErrors, setHasErrors] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-
 
     useEffect(() => {
         getPeople()
             .then((data) => {
-                setPatients(data.data);
-                setIsLoading(false)
+                const sortedPatients = data.data.sort((a, b) => {
+                  const lastNameComparison = a.lastname.localeCompare(b.lastname);
+                  if (lastNameComparison !== 0) {
+                      return lastNameComparison;
+                  }
+                  return a.firstname.localeCompare(b.firstname);
+                });
+                setAllPatients(sortedPatients);
+                setDisplayPatients(sortedPatients);
+                setIsLoading(false);
             })
             .catch((err) => {
                 console.error(err);
@@ -40,6 +48,24 @@ function Home() {
             });
     }, []);
 
+    useEffect(() => {
+        if (searchInput.length > 0) {
+            const filteredPatients = allPatients.filter((patient) => {
+                return patient.firstname.toLowerCase().match(searchInput.toLowerCase()) || patient.lastname.toLowerCase().match(searchInput.toLowerCase());
+            });
+            setDisplayPatients(filteredPatients);
+        } else {
+            setDisplayPatients(allPatients); // If search input is cleared, show all patients again
+        }
+    }, [searchInput, allPatients]);
+
+    const handleSearchChange = (e) => {
+        e.preventDefault();
+        setSearchInput(e.target.value);
+    };
+
+
+    //----------------------------- RENDERING -----------------------------
     if (hasErrors) {
         return (<div>Errors</div>)
     }
@@ -83,28 +109,36 @@ function Home() {
 
 
                 <div className="flex w-full max-w-sm items-center space-x-2 mb-5">
-                    <Input type="search" placeholder="Search..." />
+                    <Input onChange={handleSearchChange} value={searchInput} type="search" placeholder="Search..." />
                     <Button type="submit">
                         <img src="src/assets/search_logo.png"></img>
                     </Button>
                 </div>
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                    {patients.map((p, index) => (
-                        <div key={index}>
-                            <Link to={"/patient/" + p.id}>
-                                <Card className="flex items-center transition-transform active:scale-95">
-                                    <img className="ml-4 w-10 h-10" src={p.icon}></img>
-                                    <CardHeader>
-                                        <CardTitle><span className="uppercase">{p.lastname}</span> {p.firstname}</CardTitle>
-                                        <CardDescription>
-                                            <Badge className="capitalize text-neutral-500	" variant="secondary">{p.activityProfile}</Badge>
-                                        </CardDescription>
-                                    </CardHeader>
-                                </Card>
-                            </Link>
-                        </div>
-                    ))}
+
+                {displayPatients.length === 0 ? (
+                <div className="text-center py-5">
+                    <p>No results found.</p>
                 </div>
+            ) : (
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                  {displayPatients.map((p, index) => (
+                      <div key={index}>
+                          <Link to={"/patient/" + p.id}>
+                              <Card className="flex items-center transition-transform active:scale-95">
+                                  <img className="ml-4 w-10 h-10" src={p.icon}></img>
+                                  <CardHeader>
+                                      <CardTitle><span className="uppercase">{p.lastname}</span> {p.firstname}</CardTitle>
+                                      <CardDescription>
+                                          <Badge className="capitalize text-neutral-500	" variant="secondary">{p.activityProfile}</Badge>
+                                      </CardDescription>
+                                  </CardHeader>
+                              </Card>
+                          </Link>
+                      </div>
+                  ))}
+              </div>
+            )}
+
             </div>
         </>
     )
