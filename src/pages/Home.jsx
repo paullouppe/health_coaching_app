@@ -10,6 +10,7 @@ import {
     CardTitle,
   } from "@/components/ui/card"
 
+import { Skeleton } from "@/components/ui/skeleton"
 
 function Home() {
 
