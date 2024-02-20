@@ -8,10 +8,18 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet"
 
 function Home() {
     const [allPatients, setAllPatients] = useState([]); // New state to keep the original list of patients
@@ -64,18 +72,42 @@ function Home() {
 
     if (isLoading) {
         return (
-          <div className="h-screen flex items-center justify-center">
-            Loading ...
-          </div>)
+            <div className="h-screen flex items-center justify-center">
+                Loading ...
+            </div>)
     }
 
     return (
         <>
             <div className="container mx-auto px-4">
-                <header className="flex items-centerd mt-10 mb-10">
+
+                <header className="flex items-centerd mt-5 mb-5">
                     <img className="w-10 h-10" src="./public/logo_app.png"></img>
                     <h1 className="text-center text-4xl ml-3">Body Boost</h1>
+                    <Sheet>
+                        <SheetTrigger className="ml-auto mt-1">
+                            <img className="w-8 h-6" src="src/assets/menu_icon.svg"></img>
+                        </SheetTrigger>
+                        
+                        <SheetContent className="w-[400px] sm:w-[540px]">
+                            <SheetHeader>
+                                <SheetTitle className="text-xl">Menu</SheetTitle>
+                                <SheetDescription>
+                                    <Link className="flex items-centerd ml-10 mt-10" to={"/profile"}>
+                                        <img className="w-7 h-7" src="src/assets/profil_icon.svg"></img>
+                                        <p className="text-center ml-3 text-lg">Profil</p>
+                                    </Link>
+                                    <Link className="flex items-centerd ml-10 mt-10" to={"/settings"}>
+                                        <img className="w-7 h-7" src="src/assets/setting_icon.svg"></img>
+                                        <p className="text-center ml-3 text-lg">Setting</p>
+                                    </Link>
+                                </SheetDescription>
+                            </SheetHeader>
+                        </SheetContent>
+                    </Sheet>
                 </header>
+
+
                 <div className="flex w-full max-w-sm items-center space-x-2 mb-5">
                     <Input onChange={handleSearchChange} value={searchInput} type="search" placeholder="Search..." />
                     <Button type="submit">
