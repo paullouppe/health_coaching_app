@@ -37,7 +37,10 @@ function Home() {
     }
 
     if (isLoading) {
-        return (<div>loading ...</div>)
+        return (
+          <div className="h-screen flex items-center justify-center">
+            Loading ...
+          </div>)
     }
 
     return (
