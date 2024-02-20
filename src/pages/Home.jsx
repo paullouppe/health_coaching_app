@@ -7,7 +7,7 @@ function Home() {
     const [patients, setPatients] = useState([]);
     const [hasErrors, setHasErrors] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    
+
 
     useEffect(() => {
         getPeople()

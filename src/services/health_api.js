@@ -38,6 +38,7 @@ async function fetchDataWithCache(uri, storageKey, cacheDuration) {
 export const getPeople = async () => {
   return await fetchDataWithCache("/items/people", PEOPLE_STORAGE_KEY, CACHE_DURATION)
     .then(data => {
+      feedDataWithIcons(data);
       return data.data;
     })
     .catch(error => {
@@ -70,7 +71,7 @@ export const getPeopleById = async (id) => {
     return response.data.data;
   } catch (error) {
     console.error('Failed to fetch data:', error);
-    throw error; 
+    throw error;
   }
 };
 
@@ -92,4 +93,30 @@ export const getPhysiologicalData = async () => {
     .catch(error => {
       console.error('Failed to fetch data:', error);
     });
+}
+
+function feedDataWithIcons(data_tofill){
+  //filling img
+  let img_path = "src/assets/";
+  data_tofill.data.data.forEach((p, i) => {
+    if(p.sex === 1)
+      p.icon = `${img_path}man_${Math.floor(Math.random() * 6)}.png`;
+    else
+      p.icon = `${img_path}woman_${Math.floor(Math.random() * 6)}.png`;
+  });
+
+  //feeding cache
+  const cachedData = localStorage.getItem(PEOPLE_STORAGE_KEY);
+  if (cachedData) {
+    const { expiry, data } = JSON.parse(cachedData);
+    localStorage.setItem(
+      PEOPLE_STORAGE_KEY,
+      JSON.stringify({
+        expiry,
+        data: data_tofill,
+      })
+    );
+  }
+
+  console.log(data_tofill);
 }
