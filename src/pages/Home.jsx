@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import { getPeople } from "../services/health_api"
+import { useEffect, useState } from "react";
+import { getPeople } from "../services/health_api";
 import { Link } from 'react-router-dom';
 import {
     Card,
@@ -8,23 +8,24 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 function Home() {
-
-    const [patients, setPatients] = useState([]);
+    const [allPatients, setAllPatients] = useState([]); // New state to keep the original list of patients
+    const [displayPatients, setDisplayPatients] = useState([]); // This state will be used to display patients
+    const [searchInput, setSearchInput] = useState("");
     const [hasErrors, setHasErrors] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-
 
     useEffect(() => {
         getPeople()
             .then((data) => {
-                setPatients(data.data);
-                setIsLoading(false)
+                setAllPatients(data.data);
+                setDisplayPatients(data.data); // Initially, display all patients
+                setIsLoading(false);
             })
             .catch((err) => {
                 console.error(err);
@@ -32,6 +33,24 @@ function Home() {
             });
     }, []);
 
+    useEffect(() => {
+        if (searchInput.length > 0) {
+            const filteredPatients = allPatients.filter((patient) => {
+                return patient.firstname.toLowerCase().match(searchInput.toLowerCase()) || patient.lastname.toLowerCase().match(searchInput.toLowerCase());
+            });
+            setDisplayPatients(filteredPatients);
+        } else {
+            setDisplayPatients(allPatients); // If search input is cleared, show all patients again
+        }
+    }, [searchInput, allPatients]);
+
+    const handleSearchChange = (e) => {
+        e.preventDefault();
+        setSearchInput(e.target.value);
+    };
+
+
+    //----------------------------- RENDERING -----------------------------
     if (hasErrors) {
         return (<div>Errors</div>)
     }
@@ -51,13 +70,13 @@ function Home() {
                     <h1 className="text-center text-4xl ml-3">Body Boost</h1>
                 </header>
                 <div className="flex w-full max-w-sm items-center space-x-2 mb-5">
-                    <Input type="search" placeholder="Search..." />
+                    <Input onChange={handleSearchChange} value={searchInput} type="search" placeholder="Search..." />
                     <Button type="submit">
                         <img src="src/assets/search_logo.png"></img>
                     </Button>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                    {patients.map((p, index) => (
+                    {displayPatients.map((p, index) => (
                         <div key={index}>
                             <Link to={"/patient/" + p.id}>
                                 <Card className="flex items-center transition-transform active:scale-95">
