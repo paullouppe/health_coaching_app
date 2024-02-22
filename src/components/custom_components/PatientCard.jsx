@@ -21,7 +21,7 @@ function PatientCard({ patientData }) {
     return  (
         <Link to={"/patient/" + patientData.id}>
             <Card className="flex items-center transition-transform active:scale-95">
-                <img className="ml-4 w-10 h-10" src={patientData.icon}></img>
+                <img className="ml-4 w-10 h-10" src={patientData.icon}/>
                 <CardHeader>
                     <CardTitle><span className="uppercase">{patientData.lastname}</span> {patientData.firstname}</CardTitle>
                     <CardDescription>

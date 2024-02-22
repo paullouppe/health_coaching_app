@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Errors from './functional_pages/Errors'
-
-
 import PatientCard from "../components/custom_components/PatientCard"
 
 function Home() {
@@ -87,7 +85,6 @@ function Home() {
       }
     }
 
-
     return (
       <>
           <div className="container mx-auto px-4">
@@ -96,7 +93,6 @@ function Home() {
                   <img className="w-10 h-10" src="./public/logo_app.png"></img>
                   <h1 className="text-center text-4xl ml-3">Body Boost</h1>
               </header>
-
 
               <div className="flex w-full max-w-sm items-center space-x-2 mb-5">
                   <img className="relative left-0" src="src/assets/search_logo.svg" />

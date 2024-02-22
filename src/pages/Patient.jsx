@@ -34,6 +34,7 @@ function Patient() {
 
     return (
         <div className="text-center">
+            <img className="ml-4 w-20 h-20" src={"../"+patient.icon}/>
             <div>
                 <span className="uppercase">{patient.lastname}</span> {patient.firstname}
             </div>
