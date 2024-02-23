@@ -3,9 +3,7 @@ import { getPeople } from "../services/health_api";
 import { Link } from 'react-router-dom';
 import {
     Card,
-    CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
@@ -18,7 +16,7 @@ import {
     SheetDescription,
     SheetHeader,
     SheetTitle,
-    SheetTrigger,
+    SheetTrigger
 } from "@/components/ui/sheet"
 
 function Home() {
@@ -32,11 +30,11 @@ function Home() {
         getPeople()
             .then((data) => {
                 const sortedPatients = data.data.sort((a, b) => {
-                  const lastNameComparison = a.lastname.localeCompare(b.lastname);
-                  if (lastNameComparison !== 0) {
-                      return lastNameComparison;
-                  }
-                  return a.firstname.localeCompare(b.firstname);
+                    const lastNameComparison = a.lastname.localeCompare(b.lastname);
+                    if (lastNameComparison !== 0) {
+                        return lastNameComparison;
+                    }
+                    return a.firstname.localeCompare(b.firstname);
                 });
                 setAllPatients(sortedPatients);
                 setDisplayPatients(sortedPatients);
@@ -88,7 +86,7 @@ function Home() {
                         <SheetTrigger className="ml-auto mt-1">
                             <img className="w-8 h-6" src="src/assets/menu_icon.svg"></img>
                         </SheetTrigger>
-                        
+
                         <SheetContent className="w-[400px] sm:w-[540px]">
                             <SheetHeader>
                                 <SheetTitle className="text-xl">Menu</SheetTitle>
@@ -116,28 +114,28 @@ function Home() {
                 </div>
 
                 {displayPatients.length === 0 ? (
-                <div className="text-center py-5">
-                    <p>No results found.</p>
-                </div>
-            ) : (
-              <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                  {displayPatients.map((p, index) => (
-                      <div key={index}>
-                          <Link to={"/patient/" + p.id}>
-                              <Card className="flex items-center transition-transform active:scale-95">
-                                  <img className="ml-4 w-10 h-10" src={p.icon}></img>
-                                  <CardHeader>
-                                      <CardTitle><span className="uppercase">{p.lastname}</span> {p.firstname}</CardTitle>
-                                      <CardDescription>
-                                          <Badge className="capitalize text-neutral-500	" variant="secondary">{p.activityProfile}</Badge>
-                                      </CardDescription>
-                                  </CardHeader>
-                              </Card>
-                          </Link>
-                      </div>
-                  ))}
-              </div>
-            )}
+                    <div className="text-center py-5">
+                        <p>No results found.</p>
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                        {displayPatients.map((p, index) => (
+                            <div key={index}>
+                                <Link to={"/patient/" + p.id}>
+                                    <Card className="flex items-center transition-transform active:scale-95">
+                                        <img className="ml-4 w-10 h-10" src={p.icon}></img>
+                                        <CardHeader>
+                                            <CardTitle><span className="uppercase">{p.lastname}</span> {p.firstname}</CardTitle>
+                                            <CardDescription>
+                                                <Badge className="capitalize text-neutral-500	" variant="secondary">{p.activityProfile}</Badge>
+                                            </CardDescription>
+                                        </CardHeader>
+                                    </Card>
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
+                )}
 
             </div>
         </>
