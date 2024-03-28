@@ -63,7 +63,7 @@ function Home() {
       if (isLoading) {
         return (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-            {[...Array(12).keys()].map((i, index) => (
+            {[...Array(50).keys()].map((i, index) => (
               <PatientCard key={index} />
             ))}
           </div>
