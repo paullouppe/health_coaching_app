@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { getPeople } from "../services/health_api";
+import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Errors from './functional_pages/Errors'
 import PatientCard from "../components/custom_components/PatientCard"
+import Signin from './Signin';
 
 function Home() {
     const [allPatients, setAllPatients] = useState([]); // New state to keep the original list of patients
@@ -12,6 +15,9 @@ function Home() {
     const [searchInput, setSearchInput] = useState("");
     const [hasErrors, setHasErrors] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [token, setToken] = useState(Cookies.get('token'));
+
+    let navigate = useNavigate();
 
     //first load useEffect
     useEffect(() => {
@@ -57,6 +63,10 @@ function Home() {
     //----------------------------- RENDERING -----------------------------
     if (hasErrors) {
         return (<Errors/>)
+    }
+
+    if(!token) {
+      return navigate("/signin");
     }
 
     function renderList() {

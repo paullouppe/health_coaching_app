@@ -1,14 +1,20 @@
 import { useForm } from 'react-hook-form';
+import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Link } from 'react-router-dom';
 
 
-function Login({ setToken }) {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+function Signin() {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    let navigate = useNavigate();
 
     const onSubmit = data => {
-      setToken("token")
-      console.log(data);
+      const token = 'YOUR_JWT_TOKEN';
+      Cookies.set('token', token, { expires: 7, secure: true });
+
+      return navigate("/");
     };
 
     return (
@@ -35,10 +41,10 @@ function Login({ setToken }) {
           </div>
           <Button type="submit">Login</Button>
 
-          <a className="text-sm" href="#">I don't have an account</a>
+          <Link to={"/signup"}>I don't have an account</Link>
         </form>
       </div>
     );
 }
 
-export default Login
+export default Signin
