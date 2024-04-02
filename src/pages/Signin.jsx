@@ -18,7 +18,7 @@ function Signin() {
     };
 
     return (
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto md:w-2/5 md:mt-20 px-4">
         <form onSubmit={handleSubmit(onSubmit)} className="mt-10 flex flex-col gap-4">
           <h1 className="font-bold text-2xl">Login</h1>
           <div>
@@ -28,7 +28,7 @@ function Signin() {
               type="email"
               {...register("email", { required: "Email is required", pattern: /^\S+@\S+$/i })}
             />
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
           </div>
           <div>
             <label htmlFor="password">Password:</label>
@@ -37,11 +37,11 @@ function Signin() {
               type="password"
               {...register("password", { required: "Password is required" })}
             />
-            {errors.password && <p>{errors.password.message}</p>}
+            {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
           </div>
           <Button type="submit">Login</Button>
 
-          <Link to={"/signup"}>I don't have an account</Link>
+          <Button variant="secondary"><Link to={"/signup"}>I don't have an account</Link></Button>
         </form>
       </div>
     );
