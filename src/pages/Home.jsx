@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { getPeople } from "../services/health_api";
+import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Errors from './functional_pages/Errors'
 import PatientCard from "../components/custom_components/PatientCard"
+import Signin from './Signin';
 
 function Home() {
     const [allPatients, setAllPatients] = useState([]); // New state to keep the original list of patients
@@ -12,17 +15,20 @@ function Home() {
     const [searchInput, setSearchInput] = useState("");
     const [hasErrors, setHasErrors] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [token, setToken] = useState(Cookies.get('token'));
+
+    let navigate = useNavigate();
 
     //first load useEffect
     useEffect(() => {
         getPeople()
             .then((data) => {
                 const sortedPatients = data.data.sort((a, b) => {
-                  const lastNameComparison = a.lastname.localeCompare(b.lastname);
-                  if (lastNameComparison !== 0) {
-                      return lastNameComparison;
-                  }
-                  return a.firstname.localeCompare(b.firstname);
+                    const lastNameComparison = a.lastname.localeCompare(b.lastname);
+                    if (lastNameComparison !== 0) {
+                        return lastNameComparison;
+                    }
+                    return a.firstname.localeCompare(b.firstname);
                 });
                 setAllPatients(sortedPatients);
                 setDisplayPatients(sortedPatients);
@@ -59,11 +65,15 @@ function Home() {
         return (<Errors/>)
     }
 
+    if(!token) {
+      return navigate("/signin");
+    }
+
     function renderList() {
       if (isLoading) {
         return (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-            {[...Array(12).keys()].map((i, index) => (
+            {[...Array(50).keys()].map((i, index) => (
               <PatientCard key={index} />
             ))}
           </div>
