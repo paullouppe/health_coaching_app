@@ -76,7 +76,7 @@ function Home() {
         );
       } else {
         return (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {displayPatients.map((p, index) => (
               <PatientCard key={index} patientData={p} />
             ))}
