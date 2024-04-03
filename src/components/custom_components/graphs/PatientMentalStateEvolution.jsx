@@ -3,7 +3,7 @@ function PatientMentalStateEvolution({ data }) {
 
     return  (
         <>
-            time spent per activity graph
+            Patient mental state evolution graph
         </>
     )
 }

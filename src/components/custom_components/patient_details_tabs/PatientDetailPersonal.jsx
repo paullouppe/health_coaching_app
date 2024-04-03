@@ -3,7 +3,7 @@ function PatientDetailPersonal({ data }) {
 
     return  (
         <>
-            time spent per activity graph
+            Patient detail personal
         </>
     )
 }

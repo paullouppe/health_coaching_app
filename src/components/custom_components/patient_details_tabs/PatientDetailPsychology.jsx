@@ -1,9 +1,11 @@
+import PatientMentalStateEvolution from "../graphs/PatientMentalStateEvolution";
 
 function PatientDetailPsychology({ data }) {
 
     return  (
         <>
-            time spent per activity graph
+            <div>Patient detail psychology</div> 
+            <PatientMentalStateEvolution/>
         </>
     )
 }
