@@ -1,11 +1,11 @@
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Link } from 'react-router-dom';
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 
 function PatientCard({ patientData }) {
 
-    let loading = (patientData) ? false : true;
+    let loading = (patientData) ? false : true; //no data provided = tile loading
 
     if (loading) {
       return (
@@ -26,13 +26,13 @@ function PatientCard({ patientData }) {
                     <CardTitle className="text-center">
                         <div className="uppercase">{patientData.lastname}</div> {patientData.firstname}
                     </CardTitle>
-                    <CardDescription className="text-center">
+                    <CardFooter className="text-center">
                         <Badge className="capitalize text-neutral-500" variant="secondary">{patientData.activityProfile}</Badge>
-                    </CardDescription>
+                    </CardFooter>
                 </CardHeader>
             </Card>
         </Link>
     )
 }
 
-export default PatientCard
+export default PatientCard;

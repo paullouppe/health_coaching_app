@@ -42,7 +42,7 @@ function Patient() {
             <div>Height : {patient.height}</div>
             <div>Weight : {patient.weightStart}</div>
             <div>Weight Goal : {patient.weightGoal}</div>
-            <Link to={"/"}>
+            <Link to={"/patients"}>
                 <Button>Retour</Button>
             </Link>
         </div>
