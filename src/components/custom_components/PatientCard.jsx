@@ -20,12 +20,14 @@ function PatientCard({ patientData }) {
     }
     return  (
         <Link to={"/patient/" + patientData.id}>
-            <Card className="flex items-center ease-linear transition-shadow transition-transform hover:shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] active:scale-95">
-                <img className="ml-4 w-10 h-10" src={patientData.icon}/>
-                <CardHeader>
-                    <CardTitle><span className="uppercase">{patientData.lastname}</span> {patientData.firstname}</CardTitle>
-                    <CardDescription>
-                        <Badge className="capitalize text-neutral-500	" variant="secondary">{patientData.activityProfile}</Badge>
+            <Card className="flex items-center flex-col">
+                <img className="w-16 h-16 mt-5" src={patientData.icon}/>
+                <CardHeader className="mt-0">
+                    <CardTitle className="text-center">
+                        <div className="uppercase">{patientData.lastname}</div> {patientData.firstname}
+                    </CardTitle>
+                    <CardDescription className="text-center">
+                        <Badge className="capitalize text-neutral-500" variant="secondary">{patientData.activityProfile}</Badge>
                     </CardDescription>
                 </CardHeader>
             </Card>

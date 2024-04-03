@@ -14,7 +14,7 @@ function Signin() {
       const token = 'YOUR_JWT_TOKEN';
       Cookies.set('token', token, { expires: 7, secure: true });
 
-      return navigate("/");
+      return navigate("/patients");
     };
 
     return (

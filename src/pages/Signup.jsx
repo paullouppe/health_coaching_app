@@ -11,7 +11,7 @@ function Signup() {
     const password = watch("password");
 
     const onSubmit = data => {
-        return navigate("/signin");
+        return navigate("/patients");
     };
 
     return (
