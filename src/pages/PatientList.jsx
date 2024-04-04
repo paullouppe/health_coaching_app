@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input"
 import Errors from './functional_pages/Errors'
 import PatientCard from "../components/custom_components/PatientCard"
+import { Search } from "lucide-react";
+import BodyBoostTitle from "@/components/custom_components/BodyBoostTitle";
 
 function Home() {
     const [allPatients, setAllPatients] = useState([]); // New state to keep the original list of patients
@@ -90,12 +92,12 @@ function Home() {
 
               <header className="flex items-center mt-5 mb-5">
                   <img className="w-10 h-10" src="./public/logo_app.png"></img>
-                  <h1 className="text-center text-4xl ml-3">Body Boost</h1>
+                  {/* <h1 className="text-center text-4xl ml-3">Body Boost</h1> */}
+                  <BodyBoostTitle/>
               </header>
 
               <div className="flex w-full max-w-sm items-center space-x-2 mb-5">
-                  <img className="relative left-0" src="src/assets/search_logo.svg" />
-                  <Input onChange={handleSearchChange} value={searchInput} type="search" placeholder="Search" />
+                  <Input onChange={handleSearchChange} value={searchInput} type="search" startIcon={Search} placeholder="Search" />
               </div>
 
               {renderList()}
