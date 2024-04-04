@@ -1,40 +1,34 @@
-import * as React from "react";
-
+import React from "react";
 import { cn } from "@/lib/utils";
 
 const Input = React.forwardRef(
-  ({ className, type, icon: Icon, iconPosition = 'left', ...props }, ref) => {
-    return (
-      <div
+  ({ className, type, startIcon: StartIcon, endIcon: EndIcon, ...props }, ref) => (
+    <div className="w-full relative">
+      {StartIcon && (
+        <div className="absolute ml-3 top-1/2 transform -translate-y-1/2">
+          <StartIcon size={18} className="text-muted-foreground" />
+        </div>
+      )}
+      <input
+        type={type}
         className={cn(
-          "flex items-center w-full rounded-md border border-input bg-transparent shadow-sm transition-colors",
+          "flex h-10 w-full rounded-md border border-input bg-background py-2 px-4 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50",
+          StartIcon ? "pl-10" : "",
+          EndIcon ? "pr-10" : "",
           className
         )}
-      >
-        {typeof Icon === 'function' && iconPosition === 'left' && (
-          <div className="pl-3">
-            <Icon />
-          </div>
-        )}
-        <input
-          type={type}
-          className={cn(
-            "flex-1 h-9 rounded-md bg-transparent px-3 py-1 text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
-            iconPosition === 'left' ? 'pl-8' : 'pr-8', // Adjust padding based on icon position
-            className
-          )}
-          ref={ref}
-          {...props}
-        />
-        {typeof Icon === 'function' && iconPosition === 'right' && (
-          <div className="pr-3">
-            <Icon />
-          </div>
-        )}
-      </div>
-    );
-  }
+        ref={ref}
+        {...props}
+      />
+      {EndIcon && (
+        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+          <EndIcon className="text-muted-foreground" size={18} />
+        </div>
+      )}
+    </div>
+  )
 );
+
 Input.displayName = "Input";
 
 export { Input };

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import BodyBoostTitle from '@/components/custom_components/BodyBoostTitle';
-import { CircleUserRound } from 'lucide-react';
+import { CircleUserRound, LockKeyhole } from 'lucide-react';
 
 
 function Signin() {
@@ -26,14 +26,14 @@ function Signin() {
       <img className="w-11/12" src="src/assets/golf_man_undraw.svg"/>
 
       <h1 className="font-semibold text-2xl text-center">Login</h1>
-
+      
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full">
         <div>
           <Input
             id="email"
             type="email"
             placeholder="Email"
-            icon={CircleUserRound}
+            startIcon={CircleUserRound}
             {...register("email", { required: "Email is required", pattern: /^\S+@\S+$/i })}
           />
           {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
@@ -43,6 +43,7 @@ function Signin() {
             id="password"
             type="password"
             placeholder="Password"
+            startIcon={LockKeyhole}
             {...register("password", { required: "Password is required" })}
           />
           {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}

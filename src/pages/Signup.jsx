@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import BodyBoostTitle from '@/components/custom_components/BodyBoostTitle';
+import { CircleUserRound, LockKeyhole } from 'lucide-react';
 
 function Signup() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -29,6 +30,7 @@ function Signup() {
                         id="email"
                         type="email"
                         placeholder="Email"
+                        startIcon={CircleUserRound}
                         {...register("email", { required: "Email is required", pattern: /^\S+@\S+$/i })}
                     />
                     {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
@@ -38,6 +40,7 @@ function Signup() {
                         id="password"
                         type="password"
                         placeholder="Password"
+                        startIcon={LockKeyhole}
                         {...register("password", { required: "Password is required" })}
                     />
                     {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
@@ -47,6 +50,7 @@ function Signup() {
                         id="confirmPassword"
                         type="password"
                         placeholder="Password confirmation"
+                        startIcon={LockKeyhole}
                         {...register("confirmPassword", {
                             validate: value =>
                                 value === password || "The passwords do not match"
