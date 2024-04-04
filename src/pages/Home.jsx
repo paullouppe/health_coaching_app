@@ -15,7 +15,7 @@ function Home() {
 
   return (
     <>
-      <div className="container mx-auto pt-11 md:w-2/5 md:mt-20 px-4">
+      <div className="container mx-auto md:w-2/5 md:mt-20 px-8">
         <header className="flex items-center mt-5 mb-5">
           <div>
             <img className="w-10 h-10" src="./public/logo_app.png" />
@@ -34,29 +34,23 @@ function Home() {
 
         <br />
 
-        <div className="flex gap-2">
+        <div className="flex gap-4">
           <Button
             onClick={goSignUp}
-            style={{ backgroundColor: "#7C3AED" }}
             className="w-1/2"
           >
             Sign up !
           </Button>
           <Button
             onClick={goSignIn}
-            style={{
-              backgroundColor: "white",
-              borderColor: "#DFE5EE",
-              borderWidth: ".1px",
-              color: "black",
-            }}
+            variant="outline"
             className="w-1/2"
           >
             Login
           </Button>
         </div>
 
-        <div className="mx-auto mt-8">
+        <div className="mx-auto mt-8 mb-4">
           <img src="src/assets/home_img.svg" className="w-full" />
         </div>
       </div>

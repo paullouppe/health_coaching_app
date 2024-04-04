@@ -15,11 +15,15 @@ function Signup() {
     };
 
     return (
-        <div className="container mx-auto pt-11 md:w-2/5 md:mt-20 px-4">
+        <div className="container mx-auto pt-11 px-12 flex flex-col gap-5 items-center">
+
             <BodyBoostTitle />
-            <img src="src/assets/track_and_field_undraw.svg" />
-            <h1 className="font-bold text-2xl">Sign up</h1>
-            <form onSubmit={handleSubmit(onSubmit)} className="mt-10 flex flex-col gap-4">
+
+            <img className="w-11/12" src="src/assets/track_and_field_undraw.svg" />
+
+            <h1 className="font-semibold text-2xl text-center">Sign up</h1>
+
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full">
                 <div>
                     <Input
                         id="email"
@@ -53,8 +57,8 @@ function Signup() {
 
                 <Button type="submit">Sign up</Button>
 
-                <span className='text-center'>
-                    You already have an account ? <br/> <span className="underline" onClick={() => { return navigate('/signin') }}>Login</span> here !
+                <span className='text-center text-sm'>
+                    You already have an account ? <br/> <span className="underline cursor-pointer text-primary" onClick={() => { return navigate('/signin') }}>Login</span> here !
                 </span>
             </form>
         </div>
