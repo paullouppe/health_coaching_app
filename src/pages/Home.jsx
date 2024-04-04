@@ -27,23 +27,37 @@ function Home() {
         <h1 className="text-left text-4xl">
           The best <br /> coaching app on <br /> the market
         </h1>
-        <h2 >
-          <br />A powerful tool that can help you and <br />your client focus on your goals
+        <h2>
+          <br />A powerful tool that can help you and <br />
+          your client focus on your goals
         </h2>
 
         <br />
 
         <div className="flex gap-2">
-          <Button onClick={goSignUp} style={{ backgroundColor: '#7C3AED' }} className="w-1/2">
+          <Button
+            onClick={goSignUp}
+            style={{ backgroundColor: "#7C3AED" }}
+            className="w-1/2"
+          >
             Sign up !
           </Button>
-          <Button onClick={goSignIn} style={{ backgroundColor: 'white' , borderColor: '#DFE5EE', borderWidth: '.1px', color: 'black' }} className="w-1/2">
+          <Button
+            onClick={goSignIn}
+            style={{
+              backgroundColor: "white",
+              borderColor: "#DFE5EE",
+              borderWidth: ".1px",
+              color: "black",
+            }}
+            className="w-1/2"
+          >
             Login
           </Button>
         </div>
 
         <div className="mx-auto mt-8">
-        <img src="src/assets/home_img.svg" className="w-full"/>
+          <img src="src/assets/home_img.svg" className="w-full" />
         </div>
       </div>
     </>
