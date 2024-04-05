@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import BodyBoostTitle from '@/components/custom_components/BodyBoostTitle';
 import { CircleUserRound, LockKeyhole } from 'lucide-react';
+import { singin } from '@/services/auth';
 
 
 function Signin() {
@@ -12,10 +13,14 @@ function Signin() {
   let navigate = useNavigate();
 
   const onSubmit = data => {
-    const token = 'YOUR_JWT_TOKEN';
-    Cookies.set('token', token, { expires: 7, secure: true });
+    let response = singin(data);
 
-    return navigate("/patients");
+    response.then(() => {
+      return navigate("/patients");
+    }).catch((errors) => {
+      console.log("errors occuring in sign in ");
+      return;
+    })   
   };
 
   return (

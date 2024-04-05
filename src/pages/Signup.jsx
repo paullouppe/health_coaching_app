@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import BodyBoostTitle from '@/components/custom_components/BodyBoostTitle';
 import { CircleUserRound, LockKeyhole } from 'lucide-react';
+import { signup } from '@/services/auth';
 
 function Signup() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -12,7 +13,10 @@ function Signup() {
     const password = watch("password");
 
     const onSubmit = data => {
-        return navigate("/patients");
+        let response = signup(data);
+        if(response === null) return;
+
+        return navigate("/signin");
     };
 
     return (

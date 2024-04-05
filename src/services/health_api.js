@@ -76,6 +76,8 @@ export const getPeopleById = async (id) => {
   }
 };
 
+
+
 export const getPhysicalActivities = async () => {
   return await fetchDataWithCache("/items/physicalActivities", PHYSICAL_ACTIVITIES_STORAGE_KEY, CACHE_DURATION)
     .then(data => {
