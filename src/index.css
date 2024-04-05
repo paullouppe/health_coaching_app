@@ -64,14 +64,6 @@ body {
   }
   body {
     @apply bg-background text-foreground;
-  }
-  /* @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
-  html{
-    font-family: "Quicksand", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: bolder;
-    font-style: normal;
-  } */
-  
+  }  
 }
 
