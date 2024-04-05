@@ -6,105 +6,118 @@ import Errors from './functional_pages/Errors'
 import PatientCard from "../components/custom_components/PatientCard"
 import { Search } from "lucide-react";
 import BodyBoostTitle from "@/components/custom_components/BodyBoostTitle";
+import { Button } from "@/components/ui/button";
+import { logout } from "@/services/auth";
+import { CircleUserRound } from 'lucide-react'
+
 
 function Home() {
-    const [allPatients, setAllPatients] = useState([]); // New state to keep the original list of patients
-    const [displayPatients, setDisplayPatients] = useState([]); // This state will be used to display patients
-    const [searchInput, setSearchInput] = useState("");
-    const [hasErrors, setHasErrors] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
-    //first load useEffect
-    useEffect(() => {
-        getPeople()
-            .then((data) => {
-                const sortedPatients = data.data.sort((a, b) => {
-                    const lastNameComparison = a.lastname.localeCompare(b.lastname);
-                    if (lastNameComparison !== 0) {
-                        return lastNameComparison;
-                    }
-                    return a.firstname.localeCompare(b.firstname);
-                });
-                setAllPatients(sortedPatients);
-                setDisplayPatients(sortedPatients);
-                setIsLoading(false);
-            })
-            .catch((err) => {
-                console.error(err);
-                setHasErrors(true);
-            });
-    }, []);
+  const [allPatients, setAllPatients] = useState([]); // New state to keep the original list of patients
+  const [displayPatients, setDisplayPatients] = useState([]); // This state will be used to display patients
+  const [searchInput, setSearchInput] = useState("");
+  const [hasErrors, setHasErrors] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-    //search input useEffect
-    useEffect(() => {
-        if (searchInput.length > 0) {
-            const filteredPatients = allPatients.filter((patient) => {
-                return patient.firstname.toLowerCase().match(searchInput.toLowerCase()) ||
-                  patient.lastname.toLowerCase().match(searchInput.toLowerCase()) ||
-                  patient.activityProfile.toLowerCase().match(searchInput.toLowerCase())
-            });
-            setDisplayPatients(filteredPatients);
-        } else {
-            setDisplayPatients(allPatients);
-        }
-    }, [searchInput, allPatients]);
+  //first load useEffect
+  useEffect(() => {
+    getPeople()
+      .then((data) => {
+        const sortedPatients = data.data.sort((a, b) => {
+          const lastNameComparison = a.lastname.localeCompare(b.lastname);
+          if (lastNameComparison !== 0) {
+            return lastNameComparison;
+          }
+          return a.firstname.localeCompare(b.firstname);
+        });
+        setAllPatients(sortedPatients);
+        setDisplayPatients(sortedPatients);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setHasErrors(true);
+      });
+  }, []);
 
-    const handleSearchChange = (e) => {
-        e.preventDefault();
-        setSearchInput(e.target.value);
-    };
-
-
-    //----------------------------- RENDERING -----------------------------
-    if (hasErrors) {
-        return (<Errors/>)
+  //search input useEffect
+  useEffect(() => {
+    if (searchInput.length > 0) {
+      const filteredPatients = allPatients.filter((patient) => {
+        return patient.firstname.toLowerCase().match(searchInput.toLowerCase()) ||
+          patient.lastname.toLowerCase().match(searchInput.toLowerCase()) ||
+          patient.activityProfile.toLowerCase().match(searchInput.toLowerCase())
+      });
+      setDisplayPatients(filteredPatients);
+    } else {
+      setDisplayPatients(allPatients);
     }
+  }, [searchInput, allPatients]);
 
-    function renderList() {
-      if (isLoading) {
-        return (
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {[...Array(50).keys()].map((i, index) => (
-              <PatientCard key={index} />
-            ))}
-          </div>
-        );
-      } else if (displayPatients.length === 0) {
-        return (
-          <div className="text-center py-5">
-            <p>No results found.</p>
-          </div>
-        );
-      } else {
-        return (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {displayPatients.map((p, index) => (
-              <PatientCard key={index} patientData={p} />
-            ))}
-          </div>
-        );
-      }
+  const handleSearchChange = (e) => {
+    e.preventDefault();
+    setSearchInput(e.target.value);
+  };
+
+  const logUserOut = () => {
+    logout();
+    return navigate("/");
+  }
+
+
+  //----------------------------- RENDERING -----------------------------
+  if (hasErrors) {
+    return (<Errors />)
+  }
+
+  function renderList() {
+    if (isLoading) {
+      return (
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {[...Array(50).keys()].map((i, index) => (
+            <PatientCard key={index} />
+          ))}
+        </div>
+      );
+    } else if (displayPatients.length === 0) {
+      return (
+        <div className="text-center py-5">
+          <p>No results found.</p>
+        </div>
+      );
+    } else {
+      return (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {displayPatients.map((p, index) => (
+            <PatientCard key={index} patientData={p} />
+          ))}
+        </div>
+      );
     }
+  }
 
-    return (
-      <>
-          <div className="container mx-auto px-4">
+  return (
+    <>
+      <div className="container mx-auto px-4">
 
-              <header className="flex items-center mt-5 mb-5">
-                  <img className="w-10 h-10" src="./public/logo_app.png"></img>
-                  {/* <h1 className="text-center text-4xl ml-3">Body Boost</h1> */}
-                  <BodyBoostTitle/>
-              </header>
-
-              <div className="flex w-full max-w-sm items-center space-x-2 mb-5">
-                  <Input onChange={handleSearchChange} value={searchInput} type="search" startIcon={Search} placeholder="Search" />
-              </div>
-
-              {renderList()}
-
+        <header className="flex items-center mt-5 mb-5 justify-between">
+          <div className="flex items-center gap-2">
+            <img className="w-7 h-7" src="./public/logo_app.png"></img>
+            <BodyBoostTitle />
           </div>
-      </>
-    )
+          <CircleUserRound className="cursor-pointer" onClick={logUserOut} color="#3A52ED" size={28}/>
+        </header>
+
+        <div className="flex w-full max-w-sm items-center space-x-2 mb-5">
+          <Input onChange={handleSearchChange} value={searchInput} type="search" startIcon={Search} placeholder="Search" />
+        </div>
+
+        {renderList()}
+
+      </div>
+    </>
+  )
 }
 
 export default Home
