@@ -9,6 +9,7 @@ import BodyBoostTitle from "@/components/custom_components/BodyBoostTitle";
 import { Button } from "@/components/ui/button";
 import { logout } from "@/services/auth";
 import { CircleUserRound } from 'lucide-react'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 
 
 function Home() {
@@ -106,7 +107,21 @@ function Home() {
             <img className="w-7 h-7" src="./public/logo_app.png"></img>
             <BodyBoostTitle />
           </div>
-          <CircleUserRound className="cursor-pointer" onClick={logUserOut} color="#3A52ED" size={28}/>
+          <Sheet>
+            <SheetTrigger>
+              <CircleUserRound className="cursor-pointer" color="#3A52ED" size={28} />
+            </SheetTrigger>
+            <SheetContent>
+              <SheetHeader>
+                <SheetTitle></SheetTitle>
+                <SheetDescription>
+                  
+                </SheetDescription>
+              </SheetHeader>
+              <Button onClick={logUserOut}> Disconnect </Button>
+            </SheetContent>
+          </Sheet>
+         
         </header>
 
         <div className="flex w-full max-w-sm items-center space-x-2 mb-5">
