@@ -118,7 +118,10 @@ function Home() {
                   
                 </SheetDescription>
               </SheetHeader>
-              <Button onClick={logUserOut}> Disconnect </Button>
+              <div className="flex flex-col">
+                <Button onClick={logUserOut}> Disconnect </Button>
+
+              </div>
             </SheetContent>
           </Sheet>
          
