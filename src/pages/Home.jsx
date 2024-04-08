@@ -17,24 +17,20 @@ function Home() {
     <>
       <div className="container mx-auto md:w-2/5 md:mt-20 px-8">
         <header className="flex items-center mt-5 mb-5">
-          <div>
-            <img className="w-10 h-10" src="./public/logo_app.png" />
-            <br />
-            <BodyBoostTitle />
-          </div>
+          <img className="w-7 h-7 mr-2" src="./public/logo_app.png" />
+          <BodyBoostTitle />
         </header>
 
-        <h1 className="text-left text-4xl">
-          The best <br /> coaching app on <br /> the market
+        <h1 className="text-left text-3xl font-medium mb-3">
+          The best coaching app on the market
         </h1>
         <h2>
-          <br />A powerful tool that can help you and <br />
+          A powerful tool that can help you and <br />
           your client focus on your goals
         </h2>
 
-        <br />
 
-        <div className="flex gap-4">
+        <div className="flex mt-6 gap-4">
           <Button
             onClick={goSignUp}
             className="w-1/2"
