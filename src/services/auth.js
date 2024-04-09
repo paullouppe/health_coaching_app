@@ -20,7 +20,7 @@ export const singin = ({ email, password }) => {
     return axios.request(config)
         .then((response) => {
             console.log(response);
-            Cookies.set('token', response.data.data.access_token, { expires: 7, secure: true });
+            Cookies.set('token', response.data.data.access_token, { expires: response.data.data.expires, secure: true });
         })
         .catch((error) => {
             console.log(error);
