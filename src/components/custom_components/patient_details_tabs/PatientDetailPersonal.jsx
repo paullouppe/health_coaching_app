@@ -17,9 +17,9 @@ function PatientDetailPersonal({ data }) {
             }}
             className="w-1/2"
           >
-            <div class="flex items-center ml-4 mt-4">
+            <div className="flex items-center ml-4 mt-4">
               <Weight />
-              <span class="ml-2">Weight</span>       
+              <span className="ml-2">Weight</span>       
             </div>
 
             <div className="flex justify-center w-full mt-2">
@@ -37,9 +37,9 @@ function PatientDetailPersonal({ data }) {
             }}
             className="w-1/2"
           >
-            <div class="flex items-center ml-4 mt-4">
+            <div className="flex items-center ml-4 mt-4">
               <Goal />
-              <span class="ml-2">Goal</span>       
+              <span className="ml-2">Goal</span>       
             </div>
 
             <div className="flex justify-center w-full mt-2">
@@ -60,9 +60,9 @@ function PatientDetailPersonal({ data }) {
               marginBottom: "7px",
             }}
           >
-           <div class="flex items-center ml-4 mt-4">
+           <div className="flex items-center ml-4 mt-4">
               <Cake />
-              <span class="ml-4">years old</span>       
+              <span className="ml-4">years old</span>       
             </div>
 
             
@@ -79,9 +79,9 @@ function PatientDetailPersonal({ data }) {
               marginBottom: "7px",
             }}
           >
-           <div class="flex items-center ml-4 mt-4">
+           <div className="flex items-center ml-4 mt-4">
               <Ruler />
-              <span class="ml-4">meters</span>       
+              <span className="ml-4">meters</span>       
             </div>
           </div>
 
@@ -95,9 +95,9 @@ function PatientDetailPersonal({ data }) {
               marginTop: "7px",
             }}
           >
-            <div class="flex items-center ml-4 mt-4">
+            <div className="flex items-center ml-4 mt-4">
               <Activity />
-              <span class="ml-4">Activity</span>       
+              <span className="ml-4">Activity</span>       
             </div>
           </div>
         </div>
