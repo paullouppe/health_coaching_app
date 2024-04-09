@@ -100,7 +100,7 @@ export const getPhysiologicalData = async () => {
 
 function feedDataWithIcons(data_tofill){
   //filling img
-  let img_path = "src/assets/";
+  let img_path = "http://localhost:5173/images/";
   data_tofill.data.data.forEach((p, i) => {
     if(p.sex === 1)
       p.icon = `${img_path}man_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`;

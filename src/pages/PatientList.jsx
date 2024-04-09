@@ -104,7 +104,7 @@ function Home() {
 
         <header className="flex items-center mt-5 mb-5 justify-between">
           <div className="flex items-center gap-2">
-            <img className="w-7 h-7" src="./public/logo_app.png"></img>
+            <img className="w-7 h-7" src="http://localhost:5173/images/logo_app.png"></img>
             <BodyBoostTitle />
           </div>
           <Sheet>

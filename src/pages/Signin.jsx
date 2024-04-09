@@ -28,7 +28,7 @@ function Signin() {
 
       <BodyBoostTitle/>
 
-      <img className="w-11/12" src="src/assets/golf_man_undraw.svg"/>
+      <img className="w-11/12" src="http://localhost:5173/images/golf_man_undraw.svg"/>
 
       <h1 className="font-semibold text-2xl text-center">Login</h1>
       

@@ -17,7 +17,7 @@ function Home() {
     <>
       <div className="container mx-auto md:w-2/5 md:mt-20 px-8">
         <header className="flex items-center mt-5 mb-5">
-          <img className="w-7 h-7 mr-2" src="./public/logo_app.png" />
+          <img className="w-7 h-7 mr-2" src="http://localhost:5173/images/logo_app.png" />
           <BodyBoostTitle />
         </header>
 
@@ -47,7 +47,7 @@ function Home() {
         </div>
 
         <div className="mx-auto mt-8 mb-4">
-          <img src="src/assets/home_img.svg" className="w-full" />
+          <img src="http://localhost:5173/images/home_img.svg" className="w-full" />
         </div>
       </div>
     </>

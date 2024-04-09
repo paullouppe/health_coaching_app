@@ -24,7 +24,7 @@ function Signup() {
 
             <BodyBoostTitle />
 
-            <img className="w-11/12" src="src/assets/track_and_field_undraw.svg" />
+            <img className="w-11/12" src="http://localhost:5173/images/track_and_field_undraw.svg" />
 
             <h1 className="font-semibold text-2xl text-center">Sign up</h1>
 
