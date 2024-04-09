@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import { getPeopleById } from "@/services/health_api";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Errors from "./functional_pages/Errors";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PatientDetailPersonal from "@/components/custom_components/patient_details_tabs/PatientDetailPersonal";
 import PatientDetailPhysical from "@/components/custom_components/patient_details_tabs/PatientDetailPhysical";
 import PatientDetailPsychology from "@/components/custom_components/patient_details_tabs/PatientDetailPsychology";
+import { ChevronLeft } from 'lucide-react';
 
 function Patient() {
   let { patientId } = useParams();
+
+  const navigate = useNavigate();
 
   const [patient, setPatient] = useState({});
   const [hasErrors, setHasErrors] = useState(false);
@@ -27,6 +30,10 @@ function Patient() {
       });
   }, []);
 
+  const goPatientList = () => {
+    return navigate('/patients')
+  }
+
   if (hasErrors) {
     return <Errors />;
   }
@@ -36,31 +43,21 @@ function Patient() {
   }
 
   return (
-    //base of what I have done with the patient data
-    // <div className="text-center">
-    //     <img className="ml-4 w-20 h-20" src={"../"+patient.icon}/>
-    //     <div>
-    //         <span className="uppercase">{patient.lastname}</span> {patient.firstname}
-    //     </div>
-    //     <div>Sex : {(patient.sex === 1) ? "Man" : "Woman"}</div>
-    //     <div>Height : {patient.height}</div>
-    //     <div>Weight : {patient.weightStart}</div>
-    //     <div>Weight Goal : {patient.weightGoal}</div>
-    //     <Link to={"/patients"}>
-    //         <Button>Retour</Button>
-    //     </Link>
-    // </div>
-
-    <div>
-      <div className="flex justify-left">
-        back
-        <span className="flex justify-center w-full">image</span>
+    <div className="flex flex-col items-center gap-1">
+      <div className="absolute top-4 left-2 flex cursor-pointer" onClick={goPatientList}>
+        <ChevronLeft /> Back
       </div>
 
-      <div className="flex justify-center w-full">Name</div>
+      <img className="w-20 mt-4" src={patient.icon}/>
 
-      <div className="flex justify-center w-full">body</div>
-      <br></br>
+      <div className="font-medium text-2xl">
+        <span className="uppercase">{patient.lastname}</span> {patient.firstname}
+      </div>
+
+      <div className="text-sm font-bold text-[#3A52ED]">
+        {patient.activityProfile}
+      </div>
+      
 
       <div className="flex justify-center w-full">
         <Tabs defaultValue="personal" className="w-full max-w-screen-lg px-4">
@@ -76,7 +73,7 @@ function Patient() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="personal">
-            <PatientDetailPersonal />
+            <PatientDetailPersonal patient={patient} />
           </TabsContent>
           <TabsContent value="physical">
             <PatientDetailPhysical />

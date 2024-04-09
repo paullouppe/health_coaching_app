@@ -1,10 +1,14 @@
 import { Weight, Goal, Cake, Activity, Ruler } from "lucide-react";
+import GoalProgressGraph from "../graphs/GoalProgressGraph";
 
-function PatientDetailPersonal({ data }) {
+function PatientDetailPersonal({ patient }) {
+
   return (
     <>
       <div className="container mx-auto px-1">
-        <div className="flex justify-center w-full">graphique</div>
+        <div className="flex justify-center w-full">
+          <GoalProgressGraph patient={patient} />
+        </div>
         <br></br>
 
         <div className="flex gap-10 ">
