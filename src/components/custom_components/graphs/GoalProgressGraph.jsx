@@ -1,9 +1,11 @@
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 
 function GoalProgressGraph({ patient }) {
+
+    const weightProgress = Math.floor(Math.min(patient.weightStart, patient.weightGoal) / Math.max(patient.weightStart, patient.weightGoal) * 100);
     const data = [
-        { name: 'Group A', value: patient.weightStart },
-        { name: 'Group B', value: patient.weightGoal },
+        { name: 'Group A', value: weightProgress },
+        { name: 'Group B', value: 100 - weightProgress },
     ];
 
     const COLORS = ['#7C3AED', '#42217B'];
@@ -30,11 +32,11 @@ function GoalProgressGraph({ patient }) {
             </PieChart>
             <div className='flex flex-col items-center -mt-10 font-medium'>
                 <div className='text-2xl'>
-                    {Math.floor(Math.min(patient.weightStart, patient.weightGoal)/ Math.max(patient.weightStart, patient.weightGoal) * 100)}%
+                    {weightProgress}%
                 </div>
                 <div>Goal progress</div>
             </div>
-            
+
         </ResponsiveContainer>
     );
 }
