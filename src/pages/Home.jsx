@@ -1,17 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import BodyBoostTitle from "@/components/custom_components/BodyBoostTitle";
+import Cookies from 'js-cookie';
 
 function Home() {
   const navigate = useNavigate();
 
-  const goSignUp = () => {
-    return navigate("/signup");
-  };
-
-  const goSignIn = () => {
-    return navigate("/signin");
-  };
+  const renderButtons = () => {
+    if (Cookies.get('token')) {
+      return <Button onClick={() => { return navigate('/patients'); }}>Go to the patient list</Button>
+    } else {
+      return (
+        <>
+          <Button onClick={() => { return navigate('/signup'); }} className="w-1/2">Sign up !</Button>
+          <Button onClick={() => { return navigate('/signin'); }} variant="outline" className="w-1/2">Login</Button>
+        </>
+      )
+    }
+  }
 
   return (
     <>
@@ -29,21 +35,8 @@ function Home() {
           your client focus on your goals
         </h2>
 
-
         <div className="flex mt-6 gap-4">
-          <Button
-            onClick={goSignUp}
-            className="w-1/2"
-          >
-            Sign up !
-          </Button>
-          <Button
-            onClick={goSignIn}
-            variant="outline"
-            className="w-1/2"
-          >
-            Login
-          </Button>
+          {renderButtons()}
         </div>
 
         <div className="mx-auto mt-8 mb-4">
