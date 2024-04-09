@@ -48,7 +48,7 @@ function Patient() {
         <ChevronLeft /> Back
       </div>
 
-      <img className="w-20 mt-4" src={patient.icon}/>
+      <img className="w-20 mt-4" src="./src/assets/man_4.png"/>
 
       <div className="font-medium text-2xl">
         <span className="uppercase">{patient.lastname}</span> {patient.firstname}
