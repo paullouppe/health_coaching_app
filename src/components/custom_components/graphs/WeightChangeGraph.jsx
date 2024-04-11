@@ -1,5 +1,5 @@
 
-function WeightChangeGraph({ data }) {
+function WeightChangeGraph({ patient }) {
 
     return  (
         <>

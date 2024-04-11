@@ -1,5 +1,5 @@
 
-function TimeSpentPerActivity({ data }) {
+function TimeSpentPerActivity({ patient }) {
 
     return  (
         <>

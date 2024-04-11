@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getPeopleById } from "@/services/health_api";
+import { getPeopleById, getPhysicalActivitiesByPeopleId, getPhysiologicalDataByPeopleId, getPsychologicalDataByPeopleId } from "@/services/health_api";
 import { useParams, useNavigate } from "react-router-dom";
 import Errors from "./functional_pages/Errors";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -10,36 +10,48 @@ import { ChevronLeft } from 'lucide-react';
 
 function Patient() {
   let { patientId } = useParams();
-
   const navigate = useNavigate();
 
   const [patient, setPatient] = useState({});
+  const [physicalActivities, setPhysicalActivities] = useState({});
+  const [physiologicalData, setPhysiologicalData] = useState({});
+  const [psychologicalData, setPsychologicalData] = useState({});
   const [hasErrors, setHasErrors] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  //get patient data
   useEffect(() => {
-    getPeopleById(patientId)
-      .then((data) => {
-        setPatient(data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
+    const fetchData = async () => {
+      try {
+        const data = await Promise.all([
+          getPeopleById(patientId),
+          getPhysicalActivitiesByPeopleId(patientId),
+          getPhysiologicalDataByPeopleId(patientId),
+          getPsychologicalDataByPeopleId(patientId),
+        ]);
+
+        setPatient(data[0]);
+        setPhysicalActivities(data[1]);
+        setPhysiologicalData(data[2]);
+        setPsychologicalData(data[3]);
+      } catch (err) {
         console.error(err);
         setHasErrors(true);
-      });
-  }, []);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const goPatientList = () => {
-    return navigate('/patients')
-  }
+    fetchData();
+  }, [patientId]);
+
+  const goPatientList = () => navigate('/patients');
 
   if (hasErrors) {
     return <Errors />;
   }
 
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
@@ -58,17 +70,16 @@ function Patient() {
         {patient.activityProfile}
       </div>
       
-
       <div className="flex justify-center w-full">
         <Tabs defaultValue="physical" className="w-full max-w-screen-lg px-4">
           <TabsList className="flex w-full">
             <TabsTrigger value="personal" className="flex-1">
               Personal
             </TabsTrigger>
-            <TabsTrigger value="physical" className="flex-1 ">
+            <TabsTrigger value="physical" className="flex-1">
               Physical
             </TabsTrigger>
-            <TabsTrigger value="psychology" className="flex-1 ">
+            <TabsTrigger value="psychology" className="flex-1">
               Psychology
             </TabsTrigger>
           </TabsList>
@@ -76,10 +87,10 @@ function Patient() {
             <PatientDetailPersonal patient={patient} />
           </TabsContent>
           <TabsContent value="physical">
-            <PatientDetailPhysical patient={patient}/>
+            <PatientDetailPhysical physicalActivities={physicalActivities} />
           </TabsContent>
           <TabsContent value="psychology">
-            <PatientDetailPsychology />
+            <PatientDetailPsychology psychologicalData={psychologicalData} />
           </TabsContent>
         </Tabs>
       </div>

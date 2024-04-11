@@ -19,7 +19,7 @@ function PatientDetailPhysical({ patient }) {
 
     const renderGraph = (index) => {
         const GraphComponent = graphs[index];
-        return <GraphComponent />;
+        return <GraphComponent patient={patient} />;
     };
 
     return (
