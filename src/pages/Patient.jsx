@@ -87,7 +87,7 @@ function Patient() {
             <PatientDetailPersonal patient={patient} />
           </TabsContent>
           <TabsContent value="physical">
-            <PatientDetailPhysical physicalActivities={physicalActivities} />
+            <PatientDetailPhysical patient={patient} physicalActivities={physicalActivities} />
           </TabsContent>
           <TabsContent value="psychology">
             <PatientDetailPsychology psychologicalData={psychologicalData} />
