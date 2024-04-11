@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import WeightChangeGraph from "../graphs/WeightChangeGraph";
-import TimeSpentPerActivity from "../graphs/TimeSpentPerActivity";
+import CaloriesSpentPerActivity from "../graphs/CaloriesSpentPerActivity";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 
-function PatientDetailPhysical({ patient }) {
-    const graphs = [WeightChangeGraph, TimeSpentPerActivity, TimeSpentPerActivity];
+function PatientDetailPhysical({ patient, physicalActivities }) {
+    const graphs = [WeightChangeGraph, CaloriesSpentPerActivity];
     const [currentGraph, setCurrentGraph] = useState(0);
+    const [graphName, setGraphName] = useState("");
 
     const nextGraph = () => {
         setCurrentGraph((prevGraph) => (prevGraph + 1) % graphs.length);
@@ -19,7 +20,7 @@ function PatientDetailPhysical({ patient }) {
 
     const renderGraph = (index) => {
         const GraphComponent = graphs[index];
-        return <GraphComponent patient={patient} />;
+        return <GraphComponent patient={patient} setGraphName={setGraphName} physicalActivities={physicalActivities} />;
     };
 
     return (
@@ -28,10 +29,19 @@ function PatientDetailPhysical({ patient }) {
             <Card className="w-4/5 relative">
                 <div className="flex justify-around">
                     <ChevronLeft className="cursor-pointer" onClick={nextGraph}/>
-                    <span>Nom du graph</span>
+                    <span>{graphName}</span>
                     <ChevronRight className="cursor-pointer" onClick={nextGraph}/>
                 </div>
                 {renderGraph(currentGraph)}
+            </Card>
+            <Card className="w-4/5 relative">
+                Body mass index
+            </Card>
+            <Card className="w-4/5 relative">
+                Most practiced activity
+                <div className="flex">
+                    Bike 3500Kcal total
+                </div>
             </Card>
 
         </div>

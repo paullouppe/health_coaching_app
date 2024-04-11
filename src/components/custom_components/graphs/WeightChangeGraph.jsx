@@ -1,5 +1,6 @@
 
-function WeightChangeGraph({ patient }) {
+function WeightChangeGraph({ patient, setGraphName }) {
+    //setGraphName("Weight change")
 
     return  (
         <>
