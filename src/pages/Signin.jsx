@@ -1,11 +1,10 @@
 import { useForm } from 'react-hook-form';
-import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import BodyBoostTitle from '@/components/custom_components/BodyBoostTitle';
 import { CircleUserRound, LockKeyhole } from 'lucide-react';
-import { singin } from '@/services/auth';
+import { signin } from '@/services/auth';
 
 
 function Signin() {
@@ -13,7 +12,7 @@ function Signin() {
   let navigate = useNavigate();
 
   const onSubmit = data => {
-    let response = singin(data);
+    let response = signin(data);
 
     response.then(() => {
       return navigate("/patients");

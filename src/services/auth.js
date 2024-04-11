@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-export const singin = ({ email, password }) => {
+export const signin = ({ email, password }) => {
     let data = JSON.stringify({
         "email": email,
         "password": password
@@ -9,7 +9,6 @@ export const singin = ({ email, password }) => {
 
     let config = {
         method: 'post',
-        maxBodyLength: Infinity,
         url: 'https://health.shrp.dev/auth/login',
         headers: {
             'Content-Type': 'application/json'
@@ -19,10 +18,11 @@ export const singin = ({ email, password }) => {
 
     return axios.request(config)
         .then((response) => {
-            Cookies.set('token', response.data.data.access_token, { expires: response.data.data.expires, secure: true });
+            const expiryDate = new Date(new Date().getTime() + response.data.data.expires);
+            Cookies.set('token', response.data.data.access_token, { expires: expiryDate, secure: true });
         })
         .catch((error) => {
-            console.log(error);
+            console.error(error);
             return null;
         });
 }

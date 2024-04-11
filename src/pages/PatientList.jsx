@@ -25,7 +25,7 @@ function Home() {
   useEffect(() => {
     getPeople()
       .then((data) => {
-        const sortedPatients = data.data.sort((a, b) => {
+        const sortedPatients = data.sort((a, b) => {
           const lastNameComparison = a.lastname.localeCompare(b.lastname);
           if (lastNameComparison !== 0) {
             return lastNameComparison;

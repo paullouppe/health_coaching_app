@@ -66,7 +66,7 @@ export const getPeople = async () => {
 export const getPeopleById = async (id) => {
   try {
     const peopleData = await fetchDataWithCache("/items/people", PEOPLE_STORAGE_KEY, CACHE_DURATION);
-    return peopleData.data.data.find(p => p.id === id);
+    return peopleData.data.find(p => p.id === id);
   } catch (error) {
     console.error(`Failed to fetch person with ID ${id}:`, error);
     throw error;
