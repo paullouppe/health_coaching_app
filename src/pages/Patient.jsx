@@ -71,7 +71,7 @@ function Patient() {
       </div>
 
       <div className="flex w-full">
-        <Tabs defaultValue="psychology" className="w-full max-w-screen-lg px-4">
+        <Tabs defaultValue="personal" className="w-full max-w-screen-lg px-4">
           <TabsList className="flex w-full">
             <TabsTrigger value="personal" className="flex-1">
               Personal

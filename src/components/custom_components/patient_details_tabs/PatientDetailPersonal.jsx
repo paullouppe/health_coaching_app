@@ -2,106 +2,62 @@ import { Weight, Goal, Cake, Activity, Ruler } from "lucide-react";
 import GoalProgressGraph from "../graphs/GoalProgressGraph";
 
 function PatientDetailPersonal({ patient }) {
-
   return (
     <>
       <div className="container mx-auto px-1">
-        <div className="flex justify-center w-full">
+        <div className="flex justify-center w-full mb-6">
           <GoalProgressGraph patient={patient} />
         </div>
-        <br></br>
 
-        <div className="flex gap-10 ">
-          <div
-            style={{
-              height: "90px",
-              backgroundColor: "#ffffff",
-              borderRadius: "10px",
-              boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.1)",
-            }}
-            className="w-1/2"
-          >
-            <div className="flex items-center ml-4 mt-4">
+        <div className="flex gap-10">
+          <div className="w-1/2 bg-white rounded-lg shadow p-4">
+            <div className="flex items-center">
               <Weight />
-              <span className="ml-2">Weight</span>       
+              <span className="ml-2">Weight</span>
             </div>
-
             <div className="flex justify-center w-full mt-2">
-              kg
+              <span className="text-[#3A52ED] font-medium text-lg">{patient.weightStart}</span>kg
             </div>
-            
           </div>
 
-          <div
-            style={{
-              height: "90px",
-              backgroundColor: "#ffffff",
-              borderRadius: "10px",
-              boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.1)",
-            }}
-            className="w-1/2"
-          >
-            <div className="flex items-center ml-4 mt-4">
+          <div className="w-1/2 bg-white rounded-lg shadow p-4">
+            <div className="flex items-center">
               <Goal />
-              <span className="ml-2">Goal</span>       
+              <span className="ml-2">Goal</span>
             </div>
-
             <div className="flex justify-center w-full mt-2">
-              kg
+              <span className="text-[#3A52ED] font-medium text-lg">{patient.weightGoal}</span>kg
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <div
-            style={{
-              width: "100%",
-              height: "60px",
-              backgroundColor: "#ffffff",
-              borderRadius: "10px",
-              boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.1)",
-              marginTop: "20px",
-              marginBottom: "7px",
-            }}
-          >
-           <div className="flex items-center ml-4 mt-4">
+        <div className="flex flex-col gap-2 mt-6">
+          <div className="bg-white rounded-lg shadow p-4 h-15">
+            <div className="flex items-center">
               <Cake />
-              <span className="ml-4">years old</span>       
+              <span className="ml-4">
+                <span className="text-[#3A52ED] font-medium text-lg">{new Date().getFullYear() - patient.birthyear}</span> years old
+              </span>
             </div>
-
-            
           </div>
 
-          <div
-            style={{
-              width: "100%",
-              height: "60px",
-              backgroundColor: "#ffffff",
-              borderRadius: "10px",
-              boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.1)",
-              marginTop: "7px",
-              marginBottom: "7px",
-            }}
-          >
-           <div className="flex items-center ml-4 mt-4">
+          <div className="bg-white rounded-lg shadow p-4 h-15">
+            <div className="flex items-center">
               <Ruler />
-              <span className="ml-4">meters</span>       
+              <span className="ml-4">
+                <span className="text-[#3A52ED] font-medium text-lg">{(patient.height / 100).toFixed(2)}</span> meters
+              </span>
             </div>
           </div>
 
-          <div
-            style={{
-              width: "100%",
-              height: "60px",
-              backgroundColor: "#ffffff",
-              borderRadius: "10px",
-              boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.1)",
-              marginTop: "7px",
-            }}
-          >
-            <div className="flex items-center ml-4 mt-4">
+          <div className="bg-white rounded-lg shadow p-4 h-15">
+            <div className="flex items-center">
               <Activity />
-              <span className="ml-4">Activity</span>       
+              <span className="ml-4">
+                Start BMI : <span className="text-[#3A52ED] font-medium">{patient.bmiStart}</span> 
+                <br />
+                Objective : <span className="text-[#3A52ED] font-medium">{patient.bmiGoal}</span>
+              </span>
             </div>
           </div>
         </div>
