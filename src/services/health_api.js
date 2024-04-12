@@ -101,5 +101,4 @@ function feedDataWithIcons(dataToFill) {
     person.icon = `${imgPath}${person.sex === 1 ? 'man' : 'woman'}_${Math.floor(Math.random() * 5) + 1}.png`;
   });
   setCacheData(PEOPLE_STORAGE_KEY, dataToFill, CACHE_DURATION);
-  console.log(dataToFill);
 }

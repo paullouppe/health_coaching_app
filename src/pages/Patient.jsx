@@ -60,7 +60,7 @@ function Patient() {
         <ChevronLeft /> Back
       </div>
 
-      <img className="w-20 mt-4" src={patient.icon} alt="patient icon"/>
+      <img className="w-20 mt-4" src={patient.icon} alt="patient icon" />
 
       <div className="font-medium text-2xl">
         <span className="uppercase">{patient.lastname}</span> {patient.firstname}
@@ -69,8 +69,8 @@ function Patient() {
       <div className="text-sm font-bold text-[#3A52ED]">
         {patient.activityProfile}
       </div>
-      
-      <div className="flex justify-center w-full">
+
+      <div className="flex w-full">
         <Tabs defaultValue="physical" className="w-full max-w-screen-lg px-4">
           <TabsList className="flex w-full">
             <TabsTrigger value="personal" className="flex-1">
@@ -87,7 +87,7 @@ function Patient() {
             <PatientDetailPersonal patient={patient} />
           </TabsContent>
           <TabsContent value="physical">
-            <PatientDetailPhysical patient={patient} physicalActivities={physicalActivities} />
+            <PatientDetailPhysical patient={patient} physiologicalData={physiologicalData} physicalActivities={physicalActivities} />
           </TabsContent>
           <TabsContent value="psychology">
             <PatientDetailPsychology psychologicalData={psychologicalData} />

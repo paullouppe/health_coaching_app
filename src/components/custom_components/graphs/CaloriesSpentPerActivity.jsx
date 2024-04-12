@@ -1,22 +1,22 @@
-import { BarChart, Bar, LabelList, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, LabelList, ResponsiveContainer, Legend } from 'recharts';
 
 function CaloriesSpentPerActivity({ patient, setGraphName, physicalActivities }) {
     let data = [
         {
             name: 'bike',
-            uv: 0
+            caloriesSpent: 0
         },
         {
             name: 'footing',
-            uv: 0
+            caloriesSpent: 0
         },
         {
             name: 'walking',
-            uv: 0
+            caloriesSpent: 0
         },
         {
             name: 'swimming',
-            uv: 0
+            caloriesSpent: 0
         }
     ];
 
@@ -31,7 +31,7 @@ function CaloriesSpentPerActivity({ patient, setGraphName, physicalActivities })
         physicalActivities.forEach(activity => {
             const dataIndex = activityMapping[activity.type];
             if (dataIndex !== undefined) {
-                data[dataIndex].uv += activity.consumedCalories;
+                data[dataIndex].caloriesSpent += activity.consumedCalories;
             }
         });
         return data;
@@ -40,8 +40,8 @@ function CaloriesSpentPerActivity({ patient, setGraphName, physicalActivities })
     return (
         <ResponsiveContainer width="100%" height={200}>
             <BarChart data={parseDataFromPatient()}>
-                <Bar dataKey="uv" fill="#8884d8">
-                    <LabelList dataKey="uv" position="top" />
+                <Bar dataKey="caloriesSpent" fill="#D5C4F3">
+                    <LabelList dataKey="caloriesSpent" position="top" />
                 </Bar>
             </BarChart>
         </ResponsiveContainer>
