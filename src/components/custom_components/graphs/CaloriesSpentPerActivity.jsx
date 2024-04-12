@@ -1,6 +1,12 @@
+import { useEffect } from 'react';
 import { BarChart, Bar, LabelList, ResponsiveContainer, Legend } from 'recharts';
 
-function CaloriesSpentPerActivity({ patient, setGraphName, physicalActivities }) {
+function CaloriesSpentPerActivity({ patient, newGraphName, physicalActivities }) {
+
+    useEffect(() => {
+        newGraphName("Calories spent");
+    }, [])
+
     let data = [
         {
             name: 'bike',
@@ -38,13 +44,21 @@ function CaloriesSpentPerActivity({ patient, setGraphName, physicalActivities })
     }
 
     return (
-        <ResponsiveContainer width="100%" height={200}>
-            <BarChart data={parseDataFromPatient()}>
-                <Bar dataKey="caloriesSpent" fill="#D5C4F3">
-                    <LabelList dataKey="caloriesSpent" position="top" />
-                </Bar>
-            </BarChart>
-        </ResponsiveContainer>
+        <div>
+            <ResponsiveContainer width="100%" height={200}>
+                <BarChart data={parseDataFromPatient()}>
+                    <Bar dataKey="caloriesSpent" fill="#D5C4F3">
+                        <LabelList dataKey="caloriesSpent" position="top" />
+                    </Bar>
+                </BarChart>
+            </ResponsiveContainer>
+            <div className='flex justify-between px-7 pb-2'>
+                <img src='http://localhost:5173/images/biking.svg' />
+                <img src='http://localhost:5173/images/coureur.svg' />
+                <img src='http://localhost:5173/images/homme-pieton.svg' />
+                <img src='http://localhost:5173/images/la-natation.svg' />
+            </div>
+        </div>
     );
 }
 

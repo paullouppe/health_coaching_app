@@ -1,17 +1,18 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
-function WeightChangeGraph({ patient, setGraphName, physiologicalData }) {
-    // Data formatting, filtering, sorting, and string conversion
+function WeightChangeGraph({ patient, newGraphName, physiologicalData }) {
+    
+    useEffect(() => {
+        newGraphName("Weight change");
+    }, [])
+
     const formattedData = useMemo(() => {
-        // Find the most recent date in the dataset
         const mostRecentDate = new Date(Math.max(...physiologicalData.map(e => new Date(e.date))));
 
-        // Calculate four months back from the most recent date
         const fourMonthsAgo = new Date(mostRecentDate);
         fourMonthsAgo.setMonth(mostRecentDate.getMonth() - 4);
 
-        // Filter, sort, and format the data
         const filteredData = physiologicalData.filter(element =>
             new Date(element.date) >= fourMonthsAgo
         );

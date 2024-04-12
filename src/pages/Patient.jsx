@@ -71,7 +71,7 @@ function Patient() {
       </div>
 
       <div className="flex w-full">
-        <Tabs defaultValue="physical" className="w-full max-w-screen-lg px-4">
+        <Tabs defaultValue="psychology" className="w-full max-w-screen-lg px-4">
           <TabsList className="flex w-full">
             <TabsTrigger value="personal" className="flex-1">
               Personal
@@ -90,7 +90,7 @@ function Patient() {
             <PatientDetailPhysical patient={patient} physiologicalData={physiologicalData} physicalActivities={physicalActivities} />
           </TabsContent>
           <TabsContent value="psychology">
-            <PatientDetailPsychology psychologicalData={psychologicalData} />
+            <PatientDetailPsychology patient={patient} psychologicalData={psychologicalData} />
           </TabsContent>
         </Tabs>
       </div>

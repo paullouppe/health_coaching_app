@@ -10,6 +10,10 @@ function PatientDetailPhysical({ patient, physicalActivities, physiologicalData 
     const [currentGraph, setCurrentGraph] = useState(0);
     const [graphName, setGraphName] = useState("");
 
+    const newGraphName = (graphName) => {
+        setGraphName(graphName);
+    }
+
     const calculateMostPracticedActivity = () => {
         const activityCounts = [
             { type: 'swimming', count: physicalActivities.filter((obj) => obj.type === "swimming").length },
@@ -27,11 +31,11 @@ function PatientDetailPhysical({ patient, physicalActivities, physiologicalData 
     const renderIcon = () => {
         switch (calculateMostPracticedActivity()) {
             case "swimming":
-                return <img src="http://localhost:5173/images/la-natation.svg"/>
+                return <img src="http://localhost:5173/images/la-natation.svg" />
             case "bike":
                 return <Bike color="#3A52ED" />
             case "walking":
-                return <img src="http://localhost:5173/images/homme-pieton.svg"/>
+                return <img src="http://localhost:5173/images/homme-pieton.svg" />
             case "footing":
                 return <img src="http://localhost:5173/images/coureur.svg" />
             default:
@@ -61,14 +65,14 @@ function PatientDetailPhysical({ patient, physicalActivities, physiologicalData 
         const GraphComponent = graphs[index];
         return <GraphComponent
             patient={patient}
-            setGraphName={setGraphName}
+            newGraphName={newGraphName}
             physicalActivities={physicalActivities}
             physiologicalData={physiologicalData} />;
     };
 
     return (
         <div className="flex flex-col items-center gap-4">
-            <Card className="w-full">
+            <Card className="w-full pt-2">
                 <div className="flex justify-around">
                     <ChevronLeft className="cursor-pointer" onClick={previousGraph} />
                     <span>{graphName}</span>
@@ -87,7 +91,7 @@ function PatientDetailPhysical({ patient, physicalActivities, physiologicalData 
                         <span className="capitalize">{calculateMostPracticedActivity()}</span>
                     </div>
                     <div className="flex gap-2">
-                        <Flame color="#3A52ED"/>{calculateCaloriesForGivenActivityName(calculateMostPracticedActivity())} Kcal total
+                        <Flame color="#3A52ED" />{calculateCaloriesForGivenActivityName(calculateMostPracticedActivity())} Kcal total
                     </div>
                 </div>
             </Card>
