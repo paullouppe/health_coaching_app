@@ -1,5 +1,6 @@
 import { Weight, Goal, Cake, Activity, Ruler } from "lucide-react";
 import GoalProgressGraph from "../graphs/GoalProgressGraph";
+import { Card } from "@/components/ui/card";
 
 function PatientDetailPersonal({ patient }) {
   return (
@@ -10,7 +11,7 @@ function PatientDetailPersonal({ patient }) {
         </div>
 
         <div className="flex gap-10">
-          <div className="w-1/2 bg-white rounded-lg shadow p-4">
+          <Card className="w-1/2 p-4">
             <div className="flex items-center">
               <Weight />
               <span className="ml-2">Weight</span>
@@ -18,9 +19,9 @@ function PatientDetailPersonal({ patient }) {
             <div className="flex justify-center w-full mt-2">
               <span className="text-[#3A52ED] font-medium text-lg">{patient.weightStart}</span>kg
             </div>
-          </div>
+          </Card>
 
-          <div className="w-1/2 bg-white rounded-lg shadow p-4">
+          <Card className="w-1/2 p-4">
             <div className="flex items-center">
               <Goal />
               <span className="ml-2">Goal</span>
@@ -28,29 +29,29 @@ function PatientDetailPersonal({ patient }) {
             <div className="flex justify-center w-full mt-2">
               <span className="text-[#3A52ED] font-medium text-lg">{patient.weightGoal}</span>kg
             </div>
-          </div>
+          </Card>
         </div>
 
         <div className="flex flex-col gap-2 mt-6">
-          <div className="bg-white rounded-lg shadow p-4 h-15">
+          <Card className="p-4 h-15">
             <div className="flex items-center">
               <Cake />
               <span className="ml-4">
                 <span className="text-[#3A52ED] font-medium text-lg">{new Date().getFullYear() - patient.birthyear}</span> years old
               </span>
             </div>
-          </div>
+          </Card>
 
-          <div className="bg-white rounded-lg shadow p-4 h-15">
+          <Card className="p-4 h-15">
             <div className="flex items-center">
               <Ruler />
               <span className="ml-4">
                 <span className="text-[#3A52ED] font-medium text-lg">{(patient.height / 100).toFixed(2)}</span> meters
               </span>
             </div>
-          </div>
+          </Card>
 
-          <div className="bg-white rounded-lg shadow p-4 h-15">
+          <Card className="p-4 h-15">
             <div className="flex items-center">
               <Activity />
               <span className="ml-4">
@@ -59,7 +60,7 @@ function PatientDetailPersonal({ patient }) {
                 Objective : <span className="text-[#3A52ED] font-medium">{patient.bmiGoal}</span>
               </span>
             </div>
-          </div>
+          </Card>
         </div>
       </div>
     </>

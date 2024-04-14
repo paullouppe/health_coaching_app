@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { logout } from "@/services/auth";
 import { CircleUserRound } from 'lucide-react'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { ModeToggle } from "@/utils/ModeToggle";
 
 
 function Home() {
@@ -115,7 +116,7 @@ function Home() {
               <SheetHeader>
                 <SheetTitle></SheetTitle>
                 <SheetDescription>
-                  
+                  <ModeToggle/>
                 </SheetDescription>
               </SheetHeader>
               <div className="flex flex-col">

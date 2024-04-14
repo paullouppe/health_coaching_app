@@ -3,7 +3,7 @@ import { useState } from "react";
 import Cookies from 'js-cookie';
 
 
-function PrivateRoutes (){
+export function PrivateRoutes (){
 
     let auth = {'token': Cookies.get('token')}
 
@@ -12,5 +12,3 @@ function PrivateRoutes (){
     )
 
 }
-
-export default PrivateRoutes;
