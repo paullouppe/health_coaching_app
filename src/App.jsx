@@ -9,6 +9,7 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Messager from './pages/Messager';
+import Appointment from './pages/Appointment';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path="/messager/:patientId" element={<Messager />} />
             <Route path="/patients" element={<PatientList />} />
             <Route path="patient/:patientId" element={<Patient />} />
+            <Route path="appointment/:patientId" element={<Appointment />} />
           </Route>
         </Routes>
       </Router>
