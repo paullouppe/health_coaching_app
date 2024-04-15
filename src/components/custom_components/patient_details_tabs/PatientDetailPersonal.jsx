@@ -10,7 +10,7 @@ function PatientDetailPersonal({ patient }) {
           <GoalProgressGraph patient={patient} />
         </div>
 
-        <div className="flex gap-10">
+        <div className="flex gap-2">
           <Card className="w-1/2 p-4">
             <div className="flex items-center">
               <Weight />
@@ -32,7 +32,7 @@ function PatientDetailPersonal({ patient }) {
           </Card>
         </div>
 
-        <div className="flex flex-col gap-2 mt-6">
+        <div className="flex flex-col gap-2 mt-2">
           <Card className="p-4 h-15">
             <div className="flex items-center">
               <Cake />
