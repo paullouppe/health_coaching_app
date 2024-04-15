@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PatientDetailPersonal from "@/components/custom_components/patient_details_tabs/PatientDetailPersonal";
 import PatientDetailPhysical from "@/components/custom_components/patient_details_tabs/PatientDetailPhysical";
 import PatientDetailPsychology from "@/components/custom_components/patient_details_tabs/PatientDetailPsychology";
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, MessageSquareText, CalendarDays } from 'lucide-react';
 
 function Patient() {
   let { patientId } = useParams();
@@ -45,6 +45,10 @@ function Patient() {
   }, [patientId]);
 
   const goPatientList = () => navigate('/patients');
+  const goMessager = () => navigate(`/messager/${patient.id}`);
+  const goAppointment = () => navigate(`/appointment/${patient.id}`);
+
+
 
   if (hasErrors) {
     return <Errors />;
@@ -61,6 +65,14 @@ function Patient() {
       </div>
 
       <img className="w-20 mt-4" src={patient.icon} alt="patient icon" />
+      
+      <div className="absolute top-4 right-16 flex cursor-pointer" onClick={goMessager}>
+        <MessageSquareText/>
+      </div>
+
+      <div className="absolute top-4 right-5 flex cursor-pointer" onClick={goAppointment}>
+      <CalendarDays/>
+      </div>
 
       <div className="font-medium text-2xl">
         <span className="uppercase">{patient.lastname}</span> {patient.firstname}

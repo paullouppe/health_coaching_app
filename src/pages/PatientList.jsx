@@ -113,19 +113,20 @@ function Home() {
               <CircleUserRound className="cursor-pointer" color="#3A52ED" size={28} />
             </SheetTrigger>
             <SheetContent>
+              <ModeToggle className="absolute top-0 left-0" />
               <SheetHeader>
-                <SheetTitle></SheetTitle>
-                <SheetDescription>
-                  <ModeToggle/>
-                </SheetDescription>
+                <SheetTitle className="mt-2"><BodyBoostTitle /></SheetTitle>
               </SheetHeader>
-              <div className="flex flex-col">
+              <div className="flex h-5/6 flex-col mt-5 justify-between">
+                <div className="flex flex-col gap-2">
+                  <Button className="w-full" variant="outline" onClick={() => navigate('/dashboard')}>My dashboard</Button>
+                  <Button className="w-full" variant="outline">Parameters</Button>
+                </div>
                 <Button onClick={logUserOut}> Disconnect </Button>
-
               </div>
             </SheetContent>
           </Sheet>
-         
+
         </header>
 
         <div className="flex w-full max-w-sm items-center space-x-2 mb-5">
