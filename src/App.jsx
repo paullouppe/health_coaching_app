@@ -8,6 +8,7 @@ import Patient from './pages/Patient';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import Messager from './pages/Messager';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="signup" element={<Signup />} />
           <Route element={<PrivateRoutes/>}>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/messager/:patientId" element={<Messager />} />
             <Route path="/patients" element={<PatientList />} />
             <Route path="patient/:patientId" element={<Patient />} />
           </Route>
