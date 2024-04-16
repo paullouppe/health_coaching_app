@@ -30,7 +30,6 @@ function Messager() {
   const goPatient = () => navigate(`/patient/${patient.id}`);
 
   return (
-    
     <div className="flex flex-col items-center gap-1">
       <div
         className="absolute top-4 left-2 flex cursor-pointer"
@@ -45,15 +44,114 @@ function Messager() {
         {patient.firstname}
       </div>
 
-        <div
-            className="flex-left"
-            type="text"
-            style={{ width: "50%", borderRadius : "8px", height : "30px", backgroundColor:"#000000" }}
-            placeholder="  Write a message..."
-            />
+      <div
+        className="flex-left"
+        type="text"
+        style={{
+          width: "53%",
+          borderRadius: "8px",
+          backgroundColor: "#7C3AED",
+          marginLeft: "auto",
+          marginRight: "20px",
+          color: "#FFFFFF",
+          textAlign: "left",
+          paddingLeft: "10px",
+          paddingTop: "3px",
+          paddingBottom: "3px",
+          marginBottom: "5px",
+          marginTop: "15px"
+        }}
+        placeholder="  Write a message..."
+      >
+        {" "}
+        Hello {patient.firstname} ! How you feel ? 
+      </div>
 
+      
 
+      <div
+        className="flex-left"
+        type="text"
+        style={{
+          width: "53%",
+          borderRadius: "8px",
+          backgroundColor: "#E6E6E6",
+          marginRight: "auto",
+          marginLeft: "20px",
+          color: "#000000",
+          textAlign: "left",
+          paddingLeft: "10px",
+          paddingTop: "3px",
+          paddingBottom: "3px",
+          marginBottom: "5px"
+        }}
+      >
+        {" "}
+        I’m doing great with your training, thank you !{" "}
+      </div>
 
+      <div
+        className="flex-left"
+        type="text"
+        style={{
+          width: "53%",
+          borderRadius: "8px",
+          backgroundColor: "#7C3AED",
+          marginLeft: "auto",
+          marginRight: "20px",
+          color: "#FFFFFF",
+          textAlign: "left",
+          paddingLeft: "10px",
+          paddingTop: "3px",
+          paddingBottom: "3px",
+          marginBottom: "5px"
+        }}
+      >
+        {" "}
+        Do you want to take a new appointement ? 
+      </div>
+
+      <div
+        className="flex-left"
+        type="text"
+        style={{
+          width: "53%",
+          borderRadius: "8px",
+          backgroundColor: "#E6E6E6",
+          marginRight: "auto",
+          marginLeft: "20px",
+          color: "#000000",
+          textAlign: "left",
+          paddingLeft: "10px",
+          paddingTop: "3px",
+          paddingBottom: "3px",
+          marginBottom: "5px"
+        }}
+      >
+        {" "}
+        Yes ! I’m free April 21th Monday at 14pm if it’s okay for you ?{" "}
+      </div>
+
+      <div
+        className="flex-left"
+        type="text"
+        style={{
+          width: "53%",
+          borderRadius: "8px",
+          backgroundColor: "#7C3AED",
+          marginLeft: "auto",
+          marginRight: "20px",
+          color: "#FFFFFF",
+          textAlign: "left",
+          paddingLeft: "10px",
+          paddingTop: "3px",
+          paddingBottom: "3px",
+          marginBottom: "5px"
+        }}
+      >
+        {" "}
+        Alright, it’s done !{" "}
+      </div>
 
       <form
         style={{
@@ -62,14 +160,18 @@ function Messager() {
           width: "100%",
           padding: "20px",
           display: "flex",
-          alignItems: "center", 
-          justifyContent: "space-between", 
-          
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
         <input
           type="text"
-          style={{ width: "90%", marginRight: "10px", borderRadius : "8px", height : "30px" }}
+          style={{
+            width: "90%",
+            marginRight: "10px",
+            borderRadius: "8px",
+            height: "30px",
+          }}
           placeholder="  Write a message..."
         />
         <SendHorizontal style={{ fontSize: "24px" }} />{" "}
