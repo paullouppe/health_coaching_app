@@ -10,6 +10,7 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Messager from './pages/Messager';
 import Appointment from './pages/Appointment';
+import AppointmentCalendar from './pages/Calendar';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="signup" element={<Signup />} />
           <Route element={<PrivateRoutes/>}>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/calendar" element={<AppointmentCalendar />} />
             <Route path="/messager/:patientId" element={<Messager />} />
             <Route path="/patients" element={<PatientList />} />
             <Route path="patient/:patientId" element={<Patient />} />

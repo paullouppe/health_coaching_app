@@ -120,7 +120,7 @@ function Home() {
               <div className="flex h-5/6 flex-col mt-5 justify-between">
                 <div className="flex flex-col gap-2">
                   <Button className="w-full" variant="outline" onClick={() => navigate('/dashboard')}>My dashboard</Button>
-                  <Button className="w-full" variant="outline">Parameters</Button>
+                  <Button className="w-full" variant="outline" onClick={() => navigate('/calendar')}>Calendar</Button>
                 </div>
                 <Button onClick={logUserOut}> Disconnect </Button>
               </div>
