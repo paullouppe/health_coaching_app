@@ -69,7 +69,7 @@ function Home() {
 
 
   //----------------------------- RENDERING -----------------------------
-  if (hasErrors) {
+  if (true) {
     return (<Errors />)
   }
 
