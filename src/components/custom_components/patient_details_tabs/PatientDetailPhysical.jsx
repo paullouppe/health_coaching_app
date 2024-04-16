@@ -81,7 +81,7 @@ function PatientDetailPhysical({ patient, physicalActivities, physiologicalData 
                 {renderGraph(currentGraph)}
             </Card>
             <Card className="w-full px-4 py-3">
-                Body mass index <span className="text-[#3A52ED] font-medium">{Math.floor(patient.weightStart / Math.sqrt(patient.height))}</span>
+                Body mass index: <span className="text-[#3A52ED] font-medium">{patient.bmiStart}</span>
             </Card>
             <Card className="flex flex-col gap-3 w-full px-4 py-5">
                 Most practiced activity
