@@ -24,5 +24,6 @@ export const getAppointmentsByPersonId = (personId) => {
 
 export const getAppointments = () => {
     let appointments = localStorage.getItem(APPOINTMENT_KEY);
+    if (appointments == null) return [];
     return JSON.parse(appointments);
 }

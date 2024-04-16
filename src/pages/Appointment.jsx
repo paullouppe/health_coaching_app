@@ -14,7 +14,6 @@ import { z } from "zod";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";  // Assume you have an icon for the calendar or add an appropriate one
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Controller } from "react-hook-form";
 import { setAppointment } from "@/services/appointment";
 
 const AppointmentSchema = z.object({
@@ -65,6 +64,8 @@ function Appointment() {
 
     const onSubmit = (data) => {
         data.appointmentDate.setHours(selectedTime);
+        data.firstname = patient.firstname;
+        data.lastname = patient.lastname;
         setAppointment(patientId, data)
         return navigate(-1);
     };

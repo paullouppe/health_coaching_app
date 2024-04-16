@@ -1,7 +1,7 @@
 import { getAppointments } from "@/services/appointment";
 import { useEffect, useMemo, useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { CalendarClock, ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,19 +16,19 @@ function AppointmentCalendar() {
             const fetchedAppointments = await getAppointments();
             setAppointments(fetchedAppointments);
         };
-    
+
         fetchAppointments();
     }, []);
 
     const getNextAppointment = useMemo(() => {
         if (!appointments || appointments.length === 0) return "None";
-    
+
         const sortedAppointments = [...appointments].sort((a, b) => new Date(a.date) - new Date(b.date));
         return new Date(sortedAppointments[0].appointment.appointmentDate).toLocaleDateString('en-US');
     }, [appointments]);
 
     const renderAppointmentList = () => {
-        let apps = []; 
+        let apps = [];
         const currentDate = new Date(date).toISOString().slice(0, 10);  // Normalize and convert to ISO string format YYYY-MM-DD
         appointments.forEach(app => {
             const appDate = new Date(app.appointment.appointmentDate);
@@ -39,7 +39,7 @@ function AppointmentCalendar() {
         });
         return apps;
     };
-    
+
     const goPatientList = () => navigate('/patients');
 
 
@@ -65,12 +65,23 @@ function AppointmentCalendar() {
                 <div className="mt-4">
                     Appointment(s) for the {date.toLocaleDateString()}
                 </div>
-                <div className="p-4 flex flex-col gap-2">
+                <div className="p-4 w-full flex flex-col gap-2">
                     {renderAppointmentList().map((app, i) =>
                         <Card key={i}>
-                            <div>{app.appointment.title}</div>
-                            <div>{app.appointment.description}</div>
-                            <div>{app.personId}</div>
+                            <CardHeader>
+                                <CardTitle>
+                                    <div>{app.appointment.title}</div>
+                                </CardTitle>
+                                <CardDescription>
+                                    <span>{app.appointment.firstname}</span> <span>{app.appointment.lastname}</span>
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <div>{app.appointment.description}</div>
+                            </CardContent>
+                            <CardFooter>
+                                {new Date(app.appointment.appointmentDate).toLocaleTimeString('en-US')}
+                            </CardFooter>
                         </Card>
                     )}
                 </div>

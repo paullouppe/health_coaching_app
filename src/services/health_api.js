@@ -54,24 +54,16 @@ const makeApiRequest = async (url, params = {}) => {
   }
 };
 
-// export const getPeople = async () => {
-//   try {
-//     const peopleData = await fetchDataWithCache("/items/people", PEOPLE_STORAGE_KEY, CACHE_DURATION);
-//     return peopleData.data;
-//   } catch (error) {
-//     console.error('Failed to fetch people:', error);
-//   }
-// };
 
 export const getPeople = async () => {
   const filterConditions = JSON.stringify({
     "firstname": {
-      "_nnull": true,  // This ensures the property is not null
-      "_nempty": true  // This ensures the property is not an empty string
+      "_nnull": true, 
+      "_nempty": true
     },
     "lastname": {
-      "_nnull": true,  // This ensures the property is not null
-      "_nempty": true  // This ensures the property is not an empty string
+      "_nnull": true,
+      "_nempty": true
     }
   });
 
