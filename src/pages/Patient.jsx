@@ -1,12 +1,22 @@
 import { useState, useEffect } from "react";
-import { getPeopleById, getPhysicalActivitiesByPeopleId, getPhysiologicalDataByPeopleId, getPsychologicalDataByPeopleId } from "@/services/health_api";
+import {
+  getPeopleById,
+  getPhysicalActivitiesByPeopleId,
+  getPhysiologicalDataByPeopleId,
+  getPsychologicalDataByPeopleId,
+} from "@/services/health_api";
 import { useParams, useNavigate } from "react-router-dom";
 import Errors from "./functional_pages/Errors";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PatientDetailPersonal from "@/components/custom_components/patient_details_tabs/PatientDetailPersonal";
 import PatientDetailPhysical from "@/components/custom_components/patient_details_tabs/PatientDetailPhysical";
 import PatientDetailPsychology from "@/components/custom_components/patient_details_tabs/PatientDetailPsychology";
-import { ChevronLeft, MessageSquareText, CalendarDays } from 'lucide-react';
+import {
+  ChevronLeft,
+  MessageSquareText,
+  CalendarDays,
+  Loader,
+} from "lucide-react";
 
 function Patient() {
   let { patientId } = useParams();
@@ -44,38 +54,51 @@ function Patient() {
     fetchData();
   }, [patientId]);
 
-  const goPatientList = () => navigate('/patients');
+  const goPatientList = () => navigate("/patients");
   const goMessager = () => navigate(`/messager/${patient.id}`);
   const goAppointment = () => navigate(`/appointment/${patient.id}`);
-
-
 
   if (hasErrors) {
     return <Errors />;
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex flex-col items-center justify-center h-full" style={{marginTop: "70%"}}>
+        <Loader />
+        <p className="text-center mt-4">Loading...</p>
+      </div>
+    );
   }
 
   return (
     <div className="flex flex-col items-center gap-1">
-      <div className="absolute top-4 left-2 flex cursor-pointer" onClick={goPatientList}>
+      <div
+        className="absolute top-4 left-2 flex cursor-pointer"
+        onClick={goPatientList}
+      >
         <ChevronLeft /> Back
       </div>
 
       <img className="w-20 mt-4" src={patient.icon} alt="patient icon" />
-      
-      <div className="absolute top-4 right-16 flex cursor-pointer" onClick={goMessager}>
-        <MessageSquareText/>
+
+      <div
+        className="absolute top-4 right-16 flex cursor-pointer"
+        onClick={goMessager}
+      >
+        <MessageSquareText />
       </div>
 
-      <div className="absolute top-4 right-5 flex cursor-pointer" onClick={goAppointment}>
-      <CalendarDays/>
+      <div
+        className="absolute top-4 right-5 flex cursor-pointer"
+        onClick={goAppointment}
+      >
+        <CalendarDays />
       </div>
 
       <div className="font-medium text-2xl">
-        <span className="uppercase">{patient.lastname}</span> {patient.firstname}
+        <span className="uppercase">{patient.lastname}</span>{" "}
+        {patient.firstname}
       </div>
 
       <div className="text-sm font-bold text-[#3A52ED]">
@@ -99,10 +122,17 @@ function Patient() {
             <PatientDetailPersonal patient={patient} />
           </TabsContent>
           <TabsContent value="physical">
-            <PatientDetailPhysical patient={patient} physiologicalData={physiologicalData} physicalActivities={physicalActivities} />
+            <PatientDetailPhysical
+              patient={patient}
+              physiologicalData={physiologicalData}
+              physicalActivities={physicalActivities}
+            />
           </TabsContent>
           <TabsContent value="psychology">
-            <PatientDetailPsychology patient={patient} psychologicalData={psychologicalData} />
+            <PatientDetailPsychology
+              patient={patient}
+              psychologicalData={psychologicalData}
+            />
           </TabsContent>
         </Tabs>
       </div>
