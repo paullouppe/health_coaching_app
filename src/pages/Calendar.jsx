@@ -1,7 +1,7 @@
 import { getAppointments } from "@/services/appointment";
 import { useEffect, useMemo, useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
-import { Card } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { CalendarClock, ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -21,34 +21,59 @@ function AppointmentCalendar() {
     }, []);
 
     const getNextAppointment = useMemo(() => {
-        console.log(appointments);
         if (!appointments || appointments.length === 0) return "None";
     
         const sortedAppointments = [...appointments].sort((a, b) => new Date(a.date) - new Date(b.date));
-        return new Date(sortedAppointments[sortedAppointments.length - 1].appointment.appointmentDate).toLocaleDateString('en-US');
+        return new Date(sortedAppointments[0].appointment.appointmentDate).toLocaleDateString('en-US');
     }, [appointments]);
-    
+
+    const renderAppointmentList = () => {
+        let apps = []; 
+        const currentDate = new Date(date).toISOString().slice(0, 10);  // Normalize and convert to ISO string format YYYY-MM-DD
+        appointments.forEach(app => {
+            const appDate = new Date(app.appointment.appointmentDate);
+            const appDateWithoutHours = new Date(appDate.getFullYear(), appDate.getMonth(), appDate.getDate()).toISOString().slice(0, 10);  // Normalize and convert to ISO string format YYYY-MM-DD
+            if (currentDate === appDateWithoutHours) {
+                apps.push(app);
+            }
+        });
+        return apps;
+    };
     
     const goPatientList = () => navigate('/patients');
 
 
     return (
-        <div className="flex flex-col gap-2 px-4">
+        <div className="flex flex-col gap-4 px-4">
             <div className="absolute top-4 left-2 flex cursor-pointer" onClick={goPatientList}>
                 <ChevronLeft /> Back
             </div>
+            <h1 className="text-center text-xl font-medium mt-11">Schedule</h1>
             <Calendar
                 mode="single"
                 selected={date}
                 onSelect={setDate}
                 className="rounded-md border" />
-
             <Card className="flex flex-col gap-2 p-4">
                 <div className="flex gap-2">
                     <CalendarClock />
                     Next appointment
                 </div>
                 <div className="text-[#3A52ED] font-medium text-center text-lg">{getNextAppointment}</div>
+            </Card>
+            <Card className="flex flex-col items-center gap-0">
+                <div className="mt-4">
+                    Appointment(s) for the {date.toLocaleDateString()}
+                </div>
+                <div className="p-4 flex flex-col gap-2">
+                    {renderAppointmentList().map((app, i) =>
+                        <Card key={i}>
+                            <div>{app.appointment.title}</div>
+                            <div>{app.appointment.description}</div>
+                            <div>{app.personId}</div>
+                        </Card>
+                    )}
+                </div>
             </Card>
         </div>
     )

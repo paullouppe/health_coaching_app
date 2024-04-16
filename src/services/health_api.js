@@ -81,7 +81,6 @@ export const getPeople = async () => {
       PEOPLE_STORAGE_KEY,
       CACHE_DURATION
     );
-    console.log(peopleData);
     return peopleData.data;
   } catch (error) {
     console.error('Failed to fetch people:', error);
