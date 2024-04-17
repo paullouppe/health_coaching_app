@@ -11,10 +11,12 @@ import { logout } from "@/services/auth";
 import { CircleUserRound } from 'lucide-react'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { ModeToggle } from "@/utils/ModeToggle";
+import { useProfile } from "@/utils/AuthenticationProfileContext";
 
 
 function Home() {
   const navigate = useNavigate();
+  const { mail } = useProfile();
 
   const [allPatients, setAllPatients] = useState([]); // New state to keep the original list of patients
   const [displayPatients, setDisplayPatients] = useState([]); // This state will be used to display patients
@@ -116,6 +118,7 @@ function Home() {
               <ModeToggle className="absolute top-0 left-0" />
               <SheetHeader>
                 <SheetTitle className="mt-2"><BodyBoostTitle /></SheetTitle>
+                <SheetDescription>{mail}</SheetDescription>
               </SheetHeader>
               <div className="flex h-5/6 flex-col mt-5 justify-between">
                 <div className="flex flex-col gap-2">

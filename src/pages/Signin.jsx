@@ -5,16 +5,18 @@ import { Input } from "@/components/ui/input"
 import BodyBoostTitle from '@/components/custom_components/BodyBoostTitle';
 import { CircleUserRound, LockKeyhole } from 'lucide-react';
 import { signin } from '@/services/auth';
+import { useProfile } from '@/utils/AuthenticationProfileContext';
 
 
 function Signin() {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const { setMail } = useProfile();
   let navigate = useNavigate();
 
   const onSubmit = data => {
     let response = signin(data);
-
     response.then(() => {
+      setMail(data.email);
       return navigate("/patients");
     }).catch((errors) => {
       console.log("errors occuring in sign in ");

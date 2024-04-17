@@ -1,3 +1,4 @@
+import GoalProgressGraph from "@/components/custom_components/graphs/GoalProgressGraph";
 import { Card } from "@/components/ui/card";
 import { getPeople, getPhysicalActivitiesByPeopleId, getPhysiologicalDataByPeopleId, getPsychologicalDataByPeopleId } from "@/services/health_api";
 import { Cake, ChevronLeft, Goal, Ruler, Weight } from "lucide-react";
@@ -43,7 +44,7 @@ function Dashboard() {
         patients.forEach(patient => {
             mean += patient.weightStart;
         });
-        return mean / patients.length;
+        return Math.floor(mean / patients.length);
     }
 
     const meanGoalWeight = () => {
@@ -51,7 +52,7 @@ function Dashboard() {
         patients.forEach(patient => {
             mean += patient.weightGoal;
         });
-        return mean / patients.length;
+        return Math.floor(mean / patients.length);
     }
 
     const meanAge = () => {
@@ -87,29 +88,23 @@ function Dashboard() {
                 {patients.length} patients
             </div>
 
-            <div className="flex flex-col gap-3 px-3 mt-5">
-                
-                <div className="flex gap-3">
-                    <Card className="w-full p-4">
-                        <div className="flex gap-2">
-                            <Weight size={24} />
-                            Mean weight
-                        </div>
-                        <div className="text-center">
-                            <span className="text-[#3A52ED] font-medium text-lg">{meanStartWeight()}</span>kg
-                        </div>
-                    </Card>
+            <div className="flex w-full flex-col gap-3 px-3 mt-5">
+                <GoalProgressGraph patient={patients} />
+                <Card className="w-full p-4 mt-4">
+                    <div className="flex gap-2">
+                        <Weight size={24} />
+                        Mean weight
+                        <span className="text-[#3A52ED] font-medium text-lg">{meanStartWeight()}</span>kg
+                    </div>
+                </Card>
 
-                    <Card className="w-full p-4">
-                        <div className="flex gap-2">
-                            <Goal size={24} />
-                            Mean goal
-                        </div>
-                        <div className="text-center">
-                            <span className="text-[#3A52ED] font-medium text-lg">{meanGoalWeight()}</span>kg
-                        </div>
-                    </Card>
-                </div>
+                <Card className="w-full p-4">
+                    <div className="flex gap-2">
+                        <Goal size={24} />
+                        Mean goal 
+                        <span className="text-[#3A52ED] font-medium text-lg">{meanGoalWeight()}</span>kg
+                    </div>
+                </Card>
                 <Card className="flex w-full p-4 gap-1">
                     <Cake size={24} className="mr-2" /> Mean age <span className="text-[#3A52ED] font-medium text-lg">{meanAge()}</span>Yo
                 </Card>

@@ -1,8 +1,22 @@
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 
 function GoalProgressGraph({ patient }) {
+    let weightProgress = 0
 
-    const weightProgress = Math.floor(Math.min(patient.weightStart, patient.weightGoal) / Math.max(patient.weightStart, patient.weightGoal) * 100);
+    if(!Array.isArray(patient)){
+        weightProgress = Math.floor(Math.min(patient.weightStart, patient.weightGoal) / Math.max(patient.weightStart, patient.weightGoal) * 100);
+    }else{
+        let weightStart = 0;
+        let weightGoal = 0;
+        patient.forEach(patient => {
+            weightGoal += patient.weightGoal;
+            weightStart += patient.weightStart;
+        });
+        weightProgress = Math.floor(Math.min(weightStart, weightGoal) / Math.max(weightStart, weightGoal) * 100);
+    }
+
+
+
     const data = [
         { name: 'Group A', value: weightProgress },
         { name: 'Group B', value: 100 - weightProgress },
