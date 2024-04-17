@@ -9,6 +9,7 @@ Un projet pour le cours de "CM EC1 Technologies informatiques innovantes"
 - [Chloé Risse](https://www.linkedin.com/in/chloe-risse/) (Développement et travail sur les données)
 
 ## Vidéo de démonstration
-<video src="demo.mov" controls>
-  Désolé, votre navigateur ne prend pas en charge les vidéos intégrées.
-</video>
+
+https://github.com/paullouppe/health_coaching_app/assets/48521357/846e1ec9-3499-4fd5-869c-b7e35210b638
+
+(Si la vidéo ne fonctionne pas un fichier demo.mp4 est disponible à la racine du repo.)
