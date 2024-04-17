@@ -29,6 +29,7 @@ function AppointmentCalendar() {
 
     const renderAppointmentList = () => {
         let apps = [];
+        if(date == null) return [];
         const currentDate = new Date(date).toISOString().slice(0, 10);  // Normalize and convert to ISO string format YYYY-MM-DD
         appointments.forEach(app => {
             const appDate = new Date(app.appointment.appointmentDate);
