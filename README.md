@@ -9,6 +9,6 @@ Un projet pour le cours de "CM EC1 Technologies informatiques innovantes"
 - [Chloé Risse](https://www.linkedin.com/in/chloe-risse/) (Développement et travail sur les données)
 
 ## Vidéo de démonstration
-<video src="demo.mp4" controls>
+<video src="demo.mov" controls>
   Désolé, votre navigateur ne prend pas en charge les vidéos intégrées.
 </video>
