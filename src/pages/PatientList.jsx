@@ -125,7 +125,7 @@ function Home() {
                   <Button className="w-full" variant="outline" onClick={() => navigate('/dashboard')}>My dashboard</Button>
                   <Button className="w-full" variant="outline" onClick={() => navigate('/calendar')}>Calendar</Button>
                 </div>
-                <Button onClick={logUserOut}> Disconnect </Button>
+                <Button className="mb-3" onClick={logUserOut}> Disconnect </Button>
               </div>
             </SheetContent>
           </Sheet>
