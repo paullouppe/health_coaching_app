@@ -40,11 +40,19 @@ function AppointmentCalendar() {
         return apps;
     };
 
+    const getSpecialDateList = () => {
+        let specialDates = [];
+        appointments.forEach(app => {
+            const appDate = new Date(app.appointment.appointmentDate);
+            specialDates.push(new Date(appDate.getFullYear(), appDate.getMonth(), appDate.getDate()))
+        });
+        return specialDates;
+    }
+
     const goPatientList = () => navigate('/patients');
 
-
     return (
-        <div className="flex flex-col gap-4 px-4">
+        <div className="flex flex-col gap-4 px-4 pb-4">
             <div className="absolute top-4 left-2 flex cursor-pointer" onClick={goPatientList}>
                 <ChevronLeft /> Back
             </div>
@@ -53,38 +61,35 @@ function AppointmentCalendar() {
                 mode="single"
                 selected={date}
                 onSelect={setDate}
-                className="rounded-md border" />
+                className="rounded-md border" 
+                specialDates={getSpecialDateList()}/>
+
+            {(renderAppointmentList().length > 0) &&
+                <Card className="flex flex-col items-center gap-0">
+                    <div className="mt-4">
+                        Appointment(s) for the {date.toLocaleDateString()}
+                    </div>
+                    <div className="p-4 w-full flex flex-col gap-2">
+                        {renderAppointmentList().map((app, i) =>
+                            <Card key={i} className="p-4">
+                                <div className="truncate font-medium capitalize">{app.appointment.title}</div>
+                                <div className="truncate text-sm text-[#7C3AED]">
+                                    <span>{app.appointment.firstname}</span> <span>{app.appointment.lastname}</span>
+                                </div>
+                                <div className="truncate">{app.appointment.description}</div>
+                                <div className="text-right text-sm">
+                                    {new Date(app.appointment.appointmentDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: true})}
+                                </div>
+                            </Card>
+                        )}
+                    </div>
+                </Card>}
             <Card className="flex flex-col gap-2 p-4">
                 <div className="flex gap-2">
                     <CalendarClock />
                     Next appointment
                 </div>
                 <div className="text-[#3A52ED] font-medium text-center text-lg">{getNextAppointment}</div>
-            </Card>
-            <Card className="flex flex-col items-center gap-0">
-                <div className="mt-4">
-                    Appointment(s) for the {date.toLocaleDateString()}
-                </div>
-                <div className="p-4 w-full flex flex-col gap-2">
-                    {renderAppointmentList().map((app, i) =>
-                        <Card key={i}>
-                            <CardHeader>
-                                <CardTitle>
-                                    <div>{app.appointment.title}</div>
-                                </CardTitle>
-                                <CardDescription>
-                                    <span>{app.appointment.firstname}</span> <span>{app.appointment.lastname}</span>
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <div>{app.appointment.description}</div>
-                            </CardContent>
-                            <CardFooter>
-                                {new Date(app.appointment.appointmentDate).toLocaleTimeString('en-US')}
-                            </CardFooter>
-                        </Card>
-                    )}
-                </div>
             </Card>
         </div>
     )

@@ -10,8 +10,26 @@ function Calendar({
   className,
   classNames,
   showOutsideDays = true,
+  specialDates,
   ...props
 }) {
+
+  const modifiers = {
+    specialDay: date => specialDates.some(specialDate => 
+      date.getDate() === specialDate.getDate() &&
+      date.getMonth() === specialDate.getMonth() &&
+      date.getFullYear() === specialDate.getFullYear()
+    )
+  };
+
+  const modifiersStyles = {
+    specialDay: {
+      color: 'white',
+      backgroundColor: '#3A52ED',
+      opacity: 0.5
+    }
+  };
+
   return (
     (<DayPicker
       showOutsideDays={showOutsideDays}
@@ -28,7 +46,7 @@ function Calendar({
         ),
         nav_button_previous: "absolute left-1",
         nav_button_next: "absolute right-1",
-        table: "w-full border-collapse space-y-1",
+        table: "flex flex-col items-center border-collapse space-y-1",
         head_row: "flex",
         head_cell:
           "text-muted-foreground rounded-md w-8 font-normal text-[0.8rem]",
@@ -60,6 +78,8 @@ function Calendar({
         IconLeft: ({ ...props }) => <ChevronLeftIcon className="h-4 w-4" />,
         IconRight: ({ ...props }) => <ChevronRightIcon className="h-4 w-4" />,
       }}
+      modifiers={modifiers}
+      modifiersStyles={modifiersStyles}
       {...props} />)
   );
 }

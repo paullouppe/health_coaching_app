@@ -14,7 +14,7 @@ import { z } from "zod";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";  // Assume you have an icon for the calendar or add an appropriate one
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { setAppointment } from "@/services/appointment";
+import { getAppointments, setAppointment } from "@/services/appointment";
 
 const AppointmentSchema = z.object({
     appointmentDate: z.date(),
@@ -30,6 +30,7 @@ function Appointment() {
     });
 
     const [patient, setPatient] = useState({});
+    const [appointments, setAppointments] = useState([]);
     const [hasErrors, setHasErrors] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [selectedTime, setSelectedTime] = useState('');
@@ -61,6 +62,24 @@ function Appointment() {
 
         fetchData();
     }, [patientId]);
+
+    useEffect(() => {
+        const fetchAppointments = async () => {
+            const fetchedAppointments = await getAppointments();
+            setAppointments(fetchedAppointments);
+        };
+
+        fetchAppointments();
+    }, []);
+
+    const getSpecialDateList = () => {
+        let specialDates = [];
+        appointments.forEach(app => {
+            const appDate = new Date(app.appointment.appointmentDate);
+            specialDates.push(new Date(appDate.getFullYear(), appDate.getMonth(), appDate.getDate()))
+        });
+        return specialDates;
+    }
 
     const onSubmit = (data) => {
         data.appointmentDate.setHours(selectedTime);
@@ -128,6 +147,7 @@ function Appointment() {
                                 mode="single"
                                 selected={form.watch('appointmentDate')}
                                 onSelect={(date) => form.setValue('appointmentDate', date)}
+                                specialDates={getSpecialDateList()}
                             />
                         </PopoverContent>
                     </Popover>
